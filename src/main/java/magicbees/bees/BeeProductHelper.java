@@ -294,7 +294,7 @@ public class BeeProductHelper {
 			TC_CHAOS.addSpecialty(Config.propolis.getStackForType(PropolisType.CHAOS), 0.18f);
 
 			BATTY.addSpecialty(new ItemStack(Items.gunpowder), 0.04f);
-			BRAINY.addSpecialty(new ItemStack(ThaumcraftHelper.miscResource, 1, ThaumcraftHelper.MiscResource.ZOMBIE_BRAIN.ordinal()), 0.02f);
+			BRAINY.addSpecialty(new ItemStack(ThaumcraftHelper.zombieBrain, 1), 0.02f);
 			CHICKEN.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetChicken, 1), 0.09f);
 			BEEF.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetBeef, 1), 0.09f);
 			PORK.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetPork, 1), 0.09f);

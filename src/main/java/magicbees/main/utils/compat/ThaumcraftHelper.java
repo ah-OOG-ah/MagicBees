@@ -41,12 +41,20 @@ public class ThaumcraftHelper implements IModHelper {
 		THAUMIUM,
 		QUICKSILVER,
 		MAGIC_TALLOW,
-		ZOMBIE_BRAIN,
+		BRAIN_DEPRECATED,
 		AMBER,
 		ENCHANTED_FABRIC,
-		FLUX_FILTER,
+		VIS_FILTER,
 		KNOWLEDGE_FRAGMENT,
 		MIRRORED_GLASS,
+		TAINTED_GOO,
+		TAINTED_TENDRIL,
+		JAR_LABEL,
+		SALIS,
+		CHARM,
+		VOID_INGOT,
+		VOID_SEED,
+		COIN,
 		;
 	}
 
@@ -184,6 +192,7 @@ public class ThaumcraftHelper implements IModHelper {
 	public static Item nuggetChicken;
 	public static Item nuggetBeef;
 	public static Item nuggetPork;
+	public static Item zombieBrain;
 	
 	public static Class<? extends TileEntity> nodeClass;
 
@@ -274,6 +283,7 @@ public class ThaumcraftHelper implements IModHelper {
 				"ItemNuggetChicken");
 		nuggetBeef = ItemInterface.getItem(Name, "ItemNuggetBeef");
 		nuggetPork = ItemInterface.getItem(Name, "ItemNuggetPork");
+		zombieBrain = ItemInterface.getItem(Name, "ItemZombieBrain");
 	}
 
 	private static void setupCrafting() {
