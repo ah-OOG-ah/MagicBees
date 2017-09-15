@@ -236,14 +236,15 @@ public class Allele implements IAllele {
 			spawnWispOrHecate = new AlleleEffectPlaceholder(EFFECT_AM_WISP, true);
 		}
 
+		//TODO TE spawning
 		if (ThermalModsHelper.isActive()) {
 			spawnBlizz = new AlleleEffectSpawnMob(EFFECT_TE_BLIZZY, true, ThermalModsHelper.Entity.BLIZZ.entityID, ThermalModsHelper.Entity.BLIZZ.soundName)
 			.setThrottle(100)
 			.setChanceToSpawn(80);
-			spawnBlitz = new AlleleEffectSpawnMob(EFFECT_TE_BLITZ, true, ThermalModsHelper.Entity.BLIZZ.entityID, ThermalModsHelper.Entity.BLIZZ.soundName)
+			spawnBlitz = new AlleleEffectSpawnMob(EFFECT_TE_BLITZ, true, ThermalModsHelper.Entity.BLITZ.entityID, ThermalModsHelper.Entity.BLITZ.soundName)
 			.setThrottle(100)
 			.setChanceToSpawn(80);
-			spawnBasalz = new AlleleEffectSpawnMob(EFFECT_TE_BASALZ, true, ThermalModsHelper.Entity.BLIZZ.entityID, ThermalModsHelper.Entity.BLIZZ.soundName)
+			spawnBasalz = new AlleleEffectSpawnMob(EFFECT_TE_BASALZ, true, ThermalModsHelper.Entity.BASALZ.entityID, ThermalModsHelper.Entity.BASALZ.soundName)
 			.setThrottle(100)
 			.setChanceToSpawn(80);
 		}

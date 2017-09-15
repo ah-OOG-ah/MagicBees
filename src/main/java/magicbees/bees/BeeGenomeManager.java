@@ -1320,6 +1320,22 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
+	
+	public static IAllele[] getTemplateTESignalus() {
+		IAllele[] genome = getTemplateTEBase();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_SIGNALUS.getSpecies();
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTELumius() {
+		IAllele[] genome = getTemplateTEBaseNether();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_LUMIUS.getSpecies();
+		
+		return genome;
+	}
 
 	public static IAllele[] getTemplateTEDante() {
 		IAllele[] genome = getTemplateTEBaseNether();

@@ -368,6 +368,11 @@ public class BeeProductHelper {
 		TE_GROUNDED.addProduct(Config.combs.getStackForType(CombType.EARTHY), 0.16f);
 		TE_ROCKING.addProduct(Config.combs.getStackForType(CombType.EARTHY), 0.29f);
 		
+		TE_SIGNALUS.addProduct(Config.combs.getStackForType(CombType.TE_DESTABILIZED), 0.10f)
+			.addProduct(Config.combs.getStackForType(CombType.OCCULT), 0.10f);
+		TE_LUMIUS.addProduct(Config.combs.getStackForType(CombType.TE_LUX), 0.10f)
+			.addProduct(Config.combs.getStackForType(CombType.OCCULT), 0.10f);
+		
 		if (ThermalModsHelper.isActive()) {
 			LogHelper.info("Thermal Expansion bees active");
 			TE_BLIZZY.addSpecialty(ThermalModsHelper.dustBlizz, 0.09f);
@@ -380,6 +385,8 @@ public class BeeProductHelper {
 			TE_ROCKING.addSpecialty(ThermalModsHelper.dustPetrotheum, 0.09f);
 			TE_WINSOME.addSpecialty(ThermalModsHelper.dustPlatinum, 0.09f);
 			TE_ENDEARING.addSpecialty(ThermalModsHelper.enderiumNugget, 0.09f);
+			TE_SIGNALUS.addSpecialty(ThermalModsHelper.signalumNugget, 0.09f);
+			TE_LUMIUS.addSpecialty(ThermalModsHelper.lumiumNugget, 0.09f);
 		}
 	}
 	

@@ -281,6 +281,10 @@ public enum BeeSpecies
 			0x096B67, EnumTemperature.COLD, EnumHumidity.NORMAL, false, false),
 	TE_ENDEARING("TEEndearing", "cognito", BeeClassification.ADORABLE,
 			0x069E97, EnumTemperature.COLD, EnumHumidity.NORMAL, true, true),
+	TE_SIGNALUS("TESignalus", "scelerisque", BeeClassification.THERMAL,
+			0x5E0203, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
+	TE_LUMIUS("TELumius", "lucidum", BeeClassification.THERMAL,
+			0xF1FA89, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
 
 	// --------------------Redstone Arsenal Bees-----------------------------
 	RSA_FLUXED("RSAFluxed", "Thermametallic electroflux", BeeClassification.THERMAL,
@@ -442,6 +446,8 @@ public enum BeeSpecies
 		TE_LUX.registerGenomeTemplate(BeeGenomeManager.getTemplateTELux());
 		TE_WINSOME.registerGenomeTemplate(BeeGenomeManager.getTemplateTEWinsome());
 		TE_ENDEARING.registerGenomeTemplate(BeeGenomeManager.getTemplateTEEndearing());
+		TE_SIGNALUS.registerGenomeTemplate(BeeGenomeManager.getTemplateTESignalus());
+		TE_LUMIUS.registerGenomeTemplate(BeeGenomeManager.getTemplateTELumius());
 		RSA_FLUXED.registerGenomeTemplate(BeeGenomeManager.getTemplateRSAFluxed());
 		BOT_ROOTED.registerGenomeTemplate(BeeGenomeManager.getTemplateBotRooted());
 		BOT_BOTANIC.registerGenomeTemplate(BeeGenomeManager.getTemplateBotBotanic());
@@ -512,6 +518,8 @@ public enum BeeSpecies
 			TE_LUX.setInactive();
 			TE_WINSOME.setInactive();
 			TE_ENDEARING.setInactive();
+			TE_SIGNALUS.setInactive();
+			TE_LUMIUS.setInactive();
 		}
 
 		BeeProductHelper.initRedstoneArsenelProducts();

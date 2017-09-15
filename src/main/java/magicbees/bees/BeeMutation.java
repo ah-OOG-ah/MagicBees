@@ -349,6 +349,12 @@ public class BeeMutation {
 
 			beeMutationFactory.createMutation(BeeSpecies.TE_WINSOME.getSpecies(), BeeSpecies.TE_COAL.getSpecies(), BeeSpecies.TE_ENDEARING.getGenome(), 8)
 					.requireResource("blockEnderium");
+			
+			beeMutationFactory.createMutation(BeeSpecies.COPPER.getSpecies(), BeeSpecies.TE_DESTABILIZED.getSpecies(), BeeSpecies.TE_SIGNALUS.getGenome(), 8)
+				.requireResource("blockSignalum");
+			
+			beeMutationFactory.createMutation(BeeSpecies.TIN.getSpecies(), BeeSpecies.TE_LUX.getSpecies(), BeeSpecies.TE_LUMIUS.getGenome(), 8)
+				.requireResource("blockLumium");
 		}
 		
 		if (BotaniaHelper.isActive()) {

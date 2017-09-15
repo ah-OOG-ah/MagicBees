@@ -54,11 +54,17 @@ public class ThermalModsHelper implements IModHelper {
 	public static ItemStack nickelBlock;
 	public static ItemStack platinumBlock;
 	public static ItemStack bronzeBlock;
+	public static ItemStack signalumBlock;
+	public static ItemStack lumiumBlock;
+	
 	public static ItemStack enderiumNugget;
 	public static ItemStack invarNugget;
 	public static ItemStack electrumNugget;
 	public static ItemStack nickelNugget;
 	public static ItemStack platinumNugget;
+	public static ItemStack signalumNugget;
+	public static ItemStack lumiumNugget;
+	
 	public static ItemStack dustCryotheum;
 	public static ItemStack dustBlizz;
 	public static ItemStack dustPyrotheum;
@@ -68,6 +74,7 @@ public class ThermalModsHelper implements IModHelper {
 	public static ItemStack dustPetrotheum;
 	public static ItemStack dustSulfur;
 	public static ItemStack dustPlatinum;
+	
 	public static FluidStack fluidGlowstone;
 	public static FluidStack fluidCoal;
 	public static FluidStack fluidRedstone;
@@ -113,6 +120,8 @@ public class ThermalModsHelper implements IModHelper {
 		nickelBlock = GameRegistry.findItemStack(Name, "blockNickel", 1);
 		platinumBlock = GameRegistry.findItemStack(Name, "blockPlatinum", 1);
 		bronzeBlock = GameRegistry.findItemStack(Name, "blockBronze", 1);
+		signalumBlock = GameRegistry.findItemStack(Name, "blockSignalum", 1);
+		lumiumBlock = GameRegistry.findItemStack(Name, "blockLumium", 1);
 	}
 
 	private static void getItems() {
@@ -121,6 +130,9 @@ public class ThermalModsHelper implements IModHelper {
 		electrumNugget = GameRegistry.findItemStack(Name, "nuggetElectrum", 1);
 		nickelNugget = GameRegistry.findItemStack(Name, "nuggetNickel", 1);
 		platinumNugget = GameRegistry.findItemStack(Name, "nuggetPlatinum", 1);
+		signalumNugget = GameRegistry.findItemStack(Name, "nuggetSignalum", 1);
+		lumiumNugget = GameRegistry.findItemStack(Name, "nuggetLumium", 1);
+		
 		dustCryotheum = GameRegistry.findItemStack(Name, "dustCryotheum", 1);
 		dustBlizz = GameRegistry.findItemStack(Name, "dustBlizz", 1);
 		dustPyrotheum = GameRegistry.findItemStack(Name, "dustPyrotheum", 1);
