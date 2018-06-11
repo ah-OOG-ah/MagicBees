@@ -1,6 +1,8 @@
 package magicbees.main.utils.compat;
 
 import magicbees.main.Config;
+import magicbees.main.utils.BlockInterface;
+import net.minecraft.block.Block;
 import cpw.mods.fml.common.Loader;
 
 public class ExtraBeesHelper implements IModHelper {
@@ -89,7 +91,10 @@ public class ExtraBeesHelper implements IModHelper {
 		SAWDUST,
 		;
 	}
-
+	
+	public static Block hiveBlock;
+	
+	public static final String Name = "ExtraBees";
 	private static boolean isEBPresent = false;
 
 	public static boolean isActive() {
@@ -103,8 +108,13 @@ public class ExtraBeesHelper implements IModHelper {
 	}
 
 	public void init() {
+		getBlocks();
 	}
 
 	public void postInit() {
+	}
+	
+	private static void getBlocks() {
+		hiveBlock = BlockInterface.getBlock(Name, "hive");
 	}
 }

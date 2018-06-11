@@ -253,6 +253,9 @@ public class ThaumcraftHelper implements IModHelper {
 	private static Object essenceTime;
 	private static Object essenceOblivion;
 	private static Object visAuraProvider;
+	
+	private static Object voidScoop;
+	private static Object voidGrafter;
 
 	private static void getBlocks() {
 		plant = BlockInterface.getBlock(Name, "blockCustomPlant");
@@ -395,6 +398,20 @@ public class ThaumcraftHelper implements IModHelper {
 				new Object[] {
 						Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY),
 						Blocks.dragon_egg, });
+		
+		voidScoop = ThaumcraftApi.addArcaneCraftingRecipe("MB_ScoopVoid", new ItemStack(Config.voidScoop),
+				new AspectList().add(Aspect.ORDER, 2), new Object[] {
+						"sWs", "sTs", " T ",
+						's', Items.stick,
+						'W', Blocks.wool,
+						'T', new ItemStack(miscResource, 1, MiscResource.VOID_INGOT.ordinal()) });
+
+		voidGrafter = ThaumcraftApi.addArcaneCraftingRecipe("MB_GrafterVoid",
+				new ItemStack(Config.voidGrafter),
+				new AspectList().add(Aspect.ORDER, 5), new Object[] {
+						"  T", " s ", "s  ",
+						's', Items.stick,
+						'T', new ItemStack(miscResource, 1, MiscResource.VOID_INGOT.ordinal()) });
 	}
 
 	private static void setupResearch() {
@@ -444,6 +461,22 @@ public class ThaumcraftHelper implements IModHelper {
 				new ItemStack(Config.thaumiumGrafter))
 		.setPages(getResearchPage("MB_Grafter.1"), new ResearchPage((IArcaneRecipe) thaumGrafter))
 		.setParents("MB_Scoop").registerResearchItem();
+		
+		//Void tool insert
+		new ResearchItem("MB_ScoopVoid", category,
+				new AspectList().add(Aspect.TOOL, 1).add(Aspect.ELDRITCH, 1).add(Aspect.AIR, 1),
+				-4, -4, 1,
+				new ItemStack(Config.voidScoop))
+		.setPages(getResearchPage("MB_ScoopVoid.1"), new ResearchPage((IArcaneRecipe) voidScoop))
+		.setParents("MB_Scoop").setParentsHidden("VOIDMETAL").setSecondary().setConcealed().registerResearchItem();
+
+		new ResearchItem("MB_GrafterVoid", category,
+				new AspectList().add(Aspect.TOOL, 1).add(Aspect.TREE, 1).add(Aspect.ELDRITCH, 1),
+				-4, -2, 2,
+				new ItemStack(Config.voidGrafter))
+		.setPages(getResearchPage("MB_GrafterVoid.1"), new ResearchPage((IArcaneRecipe) voidGrafter))
+		.setParents("MB_Grafter").setParentsHidden("VOIDMETAL").setSecondary().setConcealed().registerResearchItem();
+		//
 
 		new ResearchItem("MB_FrameMagic", category,
 				new AspectList().add(Aspect.TOOL, 1).add(Aspect.ARMOR, 1),
@@ -595,9 +628,11 @@ public class ThaumcraftHelper implements IModHelper {
 		}
 
 		list = new AspectList().add(Aspect.ORDER, 5).add(Aspect.ARMOR, 2).add(Aspect.BEAST, 1);
-		item = new ItemStack(ForestryHelper.hiveBlock);
+		item = new ItemStack(ForestryHelper.hiveBlock,1,32767);
 		ThaumcraftApi.registerObjectTag(item, list);
-		ThaumcraftApi.registerObjectTag(new ItemStack(Config.hive), list);
+		ThaumcraftApi.registerObjectTag(new ItemStack(Config.hive,1,32767), list);
+		if (ExtraBeesHelper.isActive() )
+			ThaumcraftApi.registerObjectTag(new ItemStack(ExtraBeesHelper.hiveBlock,1,32767), list);
 
 		list = new AspectList().add(Aspect.LIGHT, 1);
 		item = new ItemStack(BlockInterface.getBlock(ForestryHelper.Name, "candle"));

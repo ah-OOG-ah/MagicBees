@@ -25,6 +25,8 @@ import magicbees.item.ItemPollen;
 import magicbees.item.ItemPropolis;
 import magicbees.item.ItemThaumiumGrafter;
 import magicbees.item.ItemThaumiumScoop;
+import magicbees.item.ItemVoidGrafter;
+import magicbees.item.ItemVoidScoop;
 import magicbees.item.ItemWax;
 import magicbees.item.types.CapsuleType;
 import magicbees.item.types.HiveFrameType;
@@ -123,6 +125,9 @@ public class Config
 	public static ItemNugget nuggets;
 	public static ItemMoonDial moonDial;
 	public static ItemMysteriousMagnet magnet;
+	
+	public static Item voidScoop;
+	public static Item voidGrafter;
 	
 	public static boolean disableMagnetSound;
 	
@@ -460,6 +465,17 @@ public class Config
 			
 			thaumiumGrafter = new ItemThaumiumGrafter();
 			GameRegistry.registerItem(thaumiumGrafter, thaumiumGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
+			
+			voidScoop = new ItemVoidScoop();
+			GameRegistry.registerItem(voidScoop, voidScoop.getUnlocalizedName(), CommonProxy.DOMAIN);
+			
+			voidGrafter = new ItemVoidGrafter();
+			GameRegistry.registerItem(voidGrafter, voidGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
+			
+			
+			
+			
+			
 		}
 	}
 	

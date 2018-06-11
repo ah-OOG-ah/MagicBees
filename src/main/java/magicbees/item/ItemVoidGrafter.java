@@ -4,27 +4,35 @@ import magicbees.main.CommonProxy;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.IRepairableExtended;
+import thaumcraft.api.IWarpingGear;
 import thaumcraft.api.ThaumcraftApi;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Optional.InterfaceList({
-				@Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = ThaumcraftHelper.Name, striprefs = true)
+				@Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = ThaumcraftHelper.Name, striprefs = true),
+				@Optional.Interface(iface = "thaumcraft.api.IWarpingGear", modid = ThaumcraftHelper.Name, striprefs = true)
 })
-public class ItemThaumiumGrafter extends ItemGrafter implements IRepairableExtended
+public class ItemVoidGrafter extends ItemGrafter implements IRepairableExtended, IWarpingGear
 {
-	public ItemThaumiumGrafter()
+	public ItemVoidGrafter()
 	{
 		super();
-		this.setMaxDamage(15);
-		this.setUnlocalizedName("thaumiumGrafter");
+		this.setMaxDamage(10);
+		this.setUnlocalizedName("voidGrafter");
 	}
 
 	@Override
@@ -83,12 +91,36 @@ public class ItemThaumiumGrafter extends ItemGrafter implements IRepairableExten
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister)
 	{
-		this.itemIcon = iconRegister.registerIcon(CommonProxy.DOMAIN + ":thaumiumGrafter");
+		this.itemIcon = iconRegister.registerIcon(CommonProxy.DOMAIN + ":voidGrafter"); //TODO
 	}
 	
 	public EnumRarity getRarity(ItemStack itemstack)
 	{
 		return EnumRarity.uncommon;
 	}
+	
+	public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_)
+	{
+		super.onUpdate(stack, world, entity, p_77663_4_, p_77663_5_);
+		if ((stack.isItemDamaged()) && (entity != null) && (entity.ticksExisted % 20 == 0) && ((entity instanceof EntityLivingBase))) {
+			stack.damageItem(-1, (EntityLivingBase)entity);
+		}
+	}
+	  
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+	{
+		if ((!player.worldObj.isRemote) && ((entity instanceof EntityLivingBase)) && (
+			(!(entity instanceof EntityPlayer)) || (MinecraftServer.getServer().isPVPEnabled()))) {
+				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.weakness.getId(), 80));
+		}
+		return super.onLeftClickEntity(stack, player, entity);
+	}
+	
+	@Override
+	public int getWarp(ItemStack itemstack, EntityPlayer player)
+	{
+		return 1;
+	}
+	
 	
 }
