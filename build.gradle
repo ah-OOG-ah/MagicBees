@@ -52,8 +52,8 @@ dependencies {
     compile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:api"
     runtime "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:dev"
     //compile name: 'Botania', version: "${project.version_botania}", ext: 'jar'
-    compile name: 'Baubles', version: "${project.version_baubles}", ext: 'jar'
-    compile name: 'Thaumcraft', version: "${project.version_thaumcraft}", ext: 'jar'
+    //compile name: 'Baubles', version: "${project.version_baubles}", ext: 'jar'
+    //compile name: 'Thaumcraft', version: "${project.version_thaumcraft}", ext: 'jar'
 }
 
 processResources
