@@ -87,6 +87,7 @@ public class Config
 	public static boolean logHiveSpawns;
 	public static double thaumcraftSaplingDroprate;
 	public static int aromaticLumpSwarmerRate;
+	public static int thaumcraftNodeMaxSize;
 
 	public static boolean arsMagicaActive;
 	public static boolean bloodMagicActive;
@@ -313,8 +314,11 @@ public class Config
 		p.comment = "Set to true to make Thaumium Grafter & Scoop require impregnated sticks in the recipe.";
 		useImpregnatedStickInTools = p.getBoolean(false);
 
-		p = configuration.get(CATEGORY_GENERAL, "thaumCraftSaplingDroprate", 0.1, "The chance for thaumcraft saplings using the thaumium grafter", 0.0, 1.0);
+		p = configuration.get(CATEGORY_GENERAL, "thaumcraftSaplingDroprate", 0.1, "The chance for thaumcraft saplings using the thaumium grafter", 0.0, 1.0);
 		thaumcraftSaplingDroprate = p.getDouble(0.1);
+		
+		p = configuration.get(CATEGORY_GENERAL, "thaumcraftNodeMaxSize", 256, "The maximum aspect amount Nexus bees can grow a node to", 64, 32767);
+		thaumcraftNodeMaxSize = p.getInt(256);
 
 		p = configuration.get(CATEGORY_GENERAL, "moonDialShowText", false);
 		p.comment = "set to true to show the current moon phase in mouse-over text.";

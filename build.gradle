@@ -87,5 +87,9 @@ task deobfJar(type: Jar) { // Generate deobfuscated
     classifier = 'deobf'
 }
 
+artifacts {
+    archives deobfJar
+}
+
 task fullBuild(dependsOn: ['build', 'deobfJar']) {
 }
