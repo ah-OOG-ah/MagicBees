@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import magicbees.main.Config;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
@@ -110,7 +111,7 @@ public class NodeHelper {
 							aspectToAdd = getWeightedRandomAspect(world.rand);
 							++rollAttempts;
 						}
-						while (aspectsBase.getAmount(aspectToAdd) > 255 && rollAttempts < 20);
+						while (aspectsBase.getAmount(aspectToAdd) > (Config.thaumcraftNodeMaxSize -1) && rollAttempts < 20);
 						
 						if (20 <= rollAttempts) {
 							return false;
