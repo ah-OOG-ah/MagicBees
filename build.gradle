@@ -20,9 +20,9 @@ repositories {
         name = "forestry"
         url = "http://maven.ic2.player.to/"
     }
-    ivy {
+   ivy {
         name "Thaumcraft"
-        artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-deobf-${project.version_mc}-[revision].[ext]"
+        artifactPattern "http://downloads.gtnewhorizons.com/Mods_for_Jenkins/[module]-deobf-${project.version_mc}-[revision].[ext]"
     }
     //ivy {
     //    name "Botania"
