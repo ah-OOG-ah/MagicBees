@@ -508,7 +508,7 @@ public class Config
 
 	private void setupMiscForestryItemHooks() {
 		// Make Aromatic Lumps a swarmer inducer. Chance is /1000.
-		if (aromaticLumpSwarmerRate <= 0) {
+		if (aromaticLumpSwarmerRate > 0) {
 			aromaticLumpSwarmerRate = (aromaticLumpSwarmerRate >= 1000) ? 1000: aromaticLumpSwarmerRate;
 			BeeManager.inducers.put(miscResources.getStackForType(ResourceType.AROMATIC_LUMP), aromaticLumpSwarmerRate);
 		}
