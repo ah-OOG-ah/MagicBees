@@ -184,10 +184,13 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 			for (EntityItem e : list) {
 				if (e.age >= 10) {
 					double x = player.posX - e.posX;
-					double y = player.posY - e.posY;
+					double y = player.posY - e.posY - 1.f;
 					double z = player.posZ - e.posZ;
 					
 					double length = Math.sqrt(x * x + y * y + z * z) * 2;
+
+					if (length < 1.2f)
+						continue;
 					
 					x = x / length + player.motionX / 2;
 					y = y / length + player.motionY / 2;
