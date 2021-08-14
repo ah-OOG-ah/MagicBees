@@ -18,7 +18,7 @@ buildscript {
 repositories {
     maven {
         name = "forestry"
-        url = ""http://downloads.gtnewhorizons.com/Mods_for_Jenkins/"
+        url = "http://downloads.gtnewhorizons.com/Mods_for_Jenkins/"
     }
    ivy {
         name "Thaumcraft"
