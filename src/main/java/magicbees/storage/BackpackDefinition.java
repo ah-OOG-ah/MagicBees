@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.storage.IBackpackDefinition;
 
 /**
@@ -70,7 +71,7 @@ public class BackpackDefinition implements IBackpackDefinition
 			// If comparison stack has meta of -1
 			if (stack.getItem() == itemStack.getItem())
 			{
-				flag = stack.getItemDamage() == -1 || stack.getItemDamage() == itemStack.getItemDamage();
+				flag = stack.getItemDamage() == -1 || stack.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack.getItemDamage() == itemStack.getItemDamage();
 			}
 		}
 
