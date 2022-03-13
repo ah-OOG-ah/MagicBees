@@ -14,5 +14,5 @@ dependencies {
         transitive = false
     }
     
-    compile("curse.maven:cofh-lib-220333:2388748")
+    compile("curse.maven:cofh-lib-220333:2388747")
 }
