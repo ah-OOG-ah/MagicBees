@@ -13,6 +13,4 @@ dependencies {
     compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") {
         transitive = false
     }
-    
-    compile("curse.maven:cofh-lib-220333:2388748")
 }
