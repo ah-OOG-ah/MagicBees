@@ -3,7 +3,7 @@
 dependencies {
     compile("com.github.GTNewHorizons:ForestryMC:4.4.6:dev")
 
-    compileOnly("com.github.GTNewHorizons:Baubles:1.0.1.14 :dev") {
+    compileOnly("com.github.GTNewHorizons:Baubles:1.0.1.14:dev") {
         transitive = false
     }
     compileOnly("com.github.GTNewHorizons:Botania:1.9.3-GTNH:api") {
