@@ -69,7 +69,7 @@ public class AlleleEffectEmpowering extends AlleleEffect implements IAlleleBeeAc
 
         int idid = (int)did;
 
-        List<INode> nodes = new ArrayList<>();
+        List<INode> nodes = new ArrayList<>(idid);
         Collections.shuffle(chunks);
         for(Chunk chunk : chunks) {
             List<INode> l = NodeHelper.findNodesInChunkWithinRange(chunk, coords.posX, coords.posY, coords.posZ, range);
@@ -110,7 +110,7 @@ public class AlleleEffectEmpowering extends AlleleEffect implements IAlleleBeeAc
                     continue;
                 }
 
-                short amount = (short)(1 + world.rand.nextInt((int)(2f * did)));
+                short amount = (short)((int)did + world.rand.nextInt((int)(2f * did)));
                 aspectsBase.add(aspectToAdd, amount);
                 node.getAspects().add(aspectToAdd, amount);
                 updateNode(node, world);
