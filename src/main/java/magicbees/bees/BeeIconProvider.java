@@ -1,51 +1,47 @@
 package magicbees.bees;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.apiculture.EnumBeeType;
+import forestry.api.apiculture.IBeeIconProvider;
 import java.util.Locale;
-
+import magicbees.main.CommonProxy;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import forestry.api.apiculture.EnumBeeType;
-import forestry.api.apiculture.IBeeIconProvider;
-
-import magicbees.main.CommonProxy;
-
 public enum BeeIconProvider implements IBeeIconProvider {
-	SKULKING(CommonProxy.DOMAIN + ":bees/skulking/"),
-	DOCTORAL(CommonProxy.DOMAIN + ":bees/doctoral/");
+    SKULKING(CommonProxy.DOMAIN + ":bees/skulking/"),
+    DOCTORAL(CommonProxy.DOMAIN + ":bees/doctoral/");
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[][] icons;
-	private final String iconPath;
+    @SideOnly(Side.CLIENT)
+    private IIcon[][] icons;
 
-	BeeIconProvider(String iconPath) {
-		this.iconPath = iconPath;
-	}
+    private final String iconPath;
 
-	@Override
-	public void registerIcons(IIconRegister itemMap) {
-		this.icons = new IIcon[EnumBeeType.VALUES.length][3];
+    BeeIconProvider(String iconPath) {
+        this.iconPath = iconPath;
+    }
 
-		IIcon body1 = itemMap.registerIcon(iconPath + "body1");
+    @Override
+    public void registerIcons(IIconRegister itemMap) {
+        this.icons = new IIcon[EnumBeeType.VALUES.length][3];
 
-		for (int i = 0; i < EnumBeeType.VALUES.length; i++) {
-			EnumBeeType beeType = EnumBeeType.VALUES[i];
-			if (beeType == EnumBeeType.NONE)
-				continue;
+        IIcon body1 = itemMap.registerIcon(iconPath + "body1");
 
-			String beeTypeIconPath = iconPath + beeType.toString().toLowerCase(Locale.ENGLISH);
+        for (int i = 0; i < EnumBeeType.VALUES.length; i++) {
+            EnumBeeType beeType = EnumBeeType.VALUES[i];
+            if (beeType == EnumBeeType.NONE) continue;
 
-			icons[i][0] = itemMap.registerIcon(beeTypeIconPath + ".outline");
-			icons[i][1] = (beeType != EnumBeeType.LARVAE) ? body1 : itemMap.registerIcon(beeTypeIconPath + ".body");
-			icons[i][2] = itemMap.registerIcon(beeTypeIconPath + ".body2");
-		}
-	}
+            String beeTypeIconPath = iconPath + beeType.toString().toLowerCase(Locale.ENGLISH);
 
-	@Override
-	public IIcon getIcon(EnumBeeType type, int renderPass) {
-		return icons[type.ordinal()][Math.min(renderPass, 2)];
-	}
+            icons[i][0] = itemMap.registerIcon(beeTypeIconPath + ".outline");
+            icons[i][1] = (beeType != EnumBeeType.LARVAE) ? body1 : itemMap.registerIcon(beeTypeIconPath + ".body");
+            icons[i][2] = itemMap.registerIcon(beeTypeIconPath + ".body2");
+        }
+    }
+
+    @Override
+    public IIcon getIcon(EnumBeeType type, int renderPass) {
+        return icons[type.ordinal()][Math.min(renderPass, 2)];
+    }
 }

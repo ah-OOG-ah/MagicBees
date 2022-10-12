@@ -1,11 +1,26 @@
 package magicbees.tileentity;
 
+import com.mojang.authlib.GameProfile;
+import forestry.api.apiculture.DefaultBeeListener;
+import forestry.api.apiculture.DefaultBeeModifier;
+import forestry.api.apiculture.IBee;
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeHousingInventory;
+import forestry.api.apiculture.IBeeListener;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.apiculture.IBeekeepingLogic;
+import forestry.api.apiculture.IBeekeepingMode;
+import forestry.api.apiculture.IHiveFrame;
+import forestry.api.core.EnumHumidity;
+import forestry.api.core.EnumTemperature;
+import forestry.api.core.ForestryAPI;
+import forestry.api.core.IErrorLogic;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import magicbees.api.bees.IMagicApiaryAuraProvider;
 import magicbees.bees.AuraCharge;
 import magicbees.bees.BeeManager;
@@ -32,24 +47,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.Constants;
 
-import com.mojang.authlib.GameProfile;
-
-import forestry.api.apiculture.DefaultBeeListener;
-import forestry.api.apiculture.DefaultBeeModifier;
-import forestry.api.apiculture.IBee;
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeHousingInventory;
-import forestry.api.apiculture.IBeeListener;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.apiculture.IBeekeepingLogic;
-import forestry.api.apiculture.IBeekeepingMode;
-import forestry.api.apiculture.IHiveFrame;
-import forestry.api.core.EnumHumidity;
-import forestry.api.core.EnumTemperature;
-import forestry.api.core.ForestryAPI;
-import forestry.api.core.IErrorLogic;
-
 public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged {
 
     // Constants
@@ -69,7 +66,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     private final MagicApiaryInventory inventory;
     private final AuraCharges auraCharges = new AuraCharges();
 
-    public TileEntityMagicApiary(){
+    public TileEntityMagicApiary() {
         beeLogic = BeeManager.beeRoot.createBeekeepingLogic(this);
         beeModifier = new MagicApiaryBeeModifier(this);
         beeListener = new MagicApiaryBeeListener(this);
@@ -106,7 +103,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     public void setOwner(EntityPlayer player) {
-    	this.ownerProfile = player.getGameProfile();
+        this.ownerProfile = player.getGameProfile();
     }
 
     @Override
@@ -179,7 +176,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         if (itemStack != null) {
             if (itemStack.stackSize <= j) {
                 setInventorySlotContents(i, null);
-            }else{
+            } else {
                 itemStack = itemStack.splitStack(j);
                 markDirty();
             }
@@ -222,14 +219,10 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public void openInventory() {
-
-    }
+    public void openInventory() {}
 
     @Override
-    public void closeInventory() {
-
-    }
+    public void closeInventory() {}
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemStack) {
@@ -288,9 +281,8 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     public void updateEntity() {
         if (worldObj.isRemote) {
             updateClientSide();
-        }
-        else {
-        	updateServerSide();
+        } else {
+            updateServerSide();
         }
     }
 
@@ -301,13 +293,12 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     public void updateServerSide() {
-   		if (this.auraProvider == null) {
-   			findAuraProvider();
-   		}
-   		else {
-   			updateAuraProvider();
-   		}
-   		tickCharges();
+        if (this.auraProvider == null) {
+            findAuraProvider();
+        } else {
+            updateAuraProvider();
+        }
+        tickCharges();
 
         if (beeLogic.canWork()) {
             beeLogic.doWork();
@@ -325,61 +316,63 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     public void sendGUINetworkData(Container container, ICrafting iCrafting) {
         iCrafting.sendProgressBarUpdate(container, 0, beeLogic.getBeeProgressPercent());
     }
-    
+
     public boolean isProductionBoosted() {
         return auraCharges.isActive(AuraCharge.PRODUCTION);
     }
-    
+
     public boolean isDeathRateBoosted() {
         return auraCharges.isActive(AuraCharge.DEATH);
     }
-    
+
     public boolean isMutationBoosted() {
         return auraCharges.isActive(AuraCharge.MUTATION);
     }
-    
+
     private void updateAuraProvider() {
-    	if (worldObj.getTotalWorldTime() % 10 != 0) {
-    		return;
-    	}
-    	if (getAuraProvider(auraProviderPosition) == null) {
-    		this.auraProvider = null;
-    		this.auraProviderPosition = null;
-    		return;
-    	}
-    	
-    	boolean auraChargesChanged = false;
+        if (worldObj.getTotalWorldTime() % 10 != 0) {
+            return;
+        }
+        if (getAuraProvider(auraProviderPosition) == null) {
+            this.auraProvider = null;
+            this.auraProviderPosition = null;
+            return;
+        }
+
+        boolean auraChargesChanged = false;
         for (AuraCharge charge : AuraCharge.values()) {
             if (!auraCharges.isActive(charge) && auraProvider.getCharge(charge.type)) {
                 auraCharges.start(charge, worldObj);
                 auraChargesChanged = true;
             }
         }
-    	
-    	if (auraChargesChanged) {
+
+        if (auraChargesChanged) {
             NetworkEventHandler.getInstance().sendAuraChargeUpdate(this, auraCharges);
-    	}
+        }
     }
-    
+
     private void tickCharges() {
         boolean auraChargesChanged = false;
 
         for (AuraCharge charge : AuraCharge.values()) {
-            if (auraCharges.isActive(charge) && auraCharges.isExpired(charge, worldObj) && (auraProvider == null || !auraProvider.getCharge(charge.type))) {
+            if (auraCharges.isActive(charge)
+                    && auraCharges.isExpired(charge, worldObj)
+                    && (auraProvider == null || !auraProvider.getCharge(charge.type))) {
                 auraCharges.stop(charge);
                 auraChargesChanged = true;
             }
         }
 
-    	if (auraChargesChanged) {
-    		NetworkEventHandler.getInstance().sendAuraChargeUpdate(this, auraCharges);
-    	}
+        if (auraChargesChanged) {
+            NetworkEventHandler.getInstance().sendAuraChargeUpdate(this, auraCharges);
+        }
     }
 
     private void findAuraProvider() {
-    	if (worldObj.getTotalWorldTime() % 5 != 0) {
-    		return;
-    	}
+        if (worldObj.getTotalWorldTime() % 5 != 0) {
+            return;
+        }
 
         if (this.auraProviderPosition == null) {
             List<Chunk> chunks = getChunksInSearchRange();
@@ -395,67 +388,72 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
             }
         }
     }
-    
-	private List<Chunk> getChunksInSearchRange() {
-		List<Chunk> chunks = new ArrayList<Chunk>(4);
-		chunks.add(worldObj.getChunkFromBlockCoords(xCoord - AURAPROVIDER_SEARCH_RADIUS, zCoord - AURAPROVIDER_SEARCH_RADIUS));
-		Chunk chunk = worldObj.getChunkFromBlockCoords(xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord - AURAPROVIDER_SEARCH_RADIUS);
-		if (!chunks.contains(chunk)) {
-			chunks.add(chunk);
-		}
-		chunk = worldObj.getChunkFromBlockCoords(xCoord - AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
-		if (!chunks.contains(chunk)) {
-			chunks.add(chunk);
-		}
-		chunk = worldObj.getChunkFromBlockCoords(xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
-		if (!chunks.contains(chunk)) {
-			chunks.add(chunk);
-		}
-		return chunks;
-	}
-	
-	@SuppressWarnings("unchecked")
-	private boolean searchChunkForBooster(Chunk chunk) {
-		Vec3 apiaryPos = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
-		for (Map.Entry<ChunkPosition, TileEntity> entry : ((Map<ChunkPosition, TileEntity>)chunk.chunkTileEntityMap).entrySet()) {
-			TileEntity entity = entry.getValue();
-			if (entity instanceof IMagicApiaryAuraProvider) {
-				Vec3 tePos = Vec3.createVectorHelper(entity.xCoord, entity.yCoord, entity.zCoord);
-				Vec3 result = apiaryPos.subtract(tePos);
-				if (result.lengthVector() <= AURAPROVIDER_SEARCH_RADIUS) {
-					saveAuraProviderPosition(entity.xCoord, entity.yCoord, entity.zCoord);
-					this.auraProvider = (IMagicApiaryAuraProvider)entity;
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	private void saveAuraProviderPosition(int x, int y, int z) {
-		auraProviderPosition = new ChunkCoords(worldObj.provider.dimensionId, x, y, z);
-	}
+
+    private List<Chunk> getChunksInSearchRange() {
+        List<Chunk> chunks = new ArrayList<Chunk>(4);
+        chunks.add(worldObj.getChunkFromBlockCoords(
+                xCoord - AURAPROVIDER_SEARCH_RADIUS, zCoord - AURAPROVIDER_SEARCH_RADIUS));
+        Chunk chunk = worldObj.getChunkFromBlockCoords(
+                xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord - AURAPROVIDER_SEARCH_RADIUS);
+        if (!chunks.contains(chunk)) {
+            chunks.add(chunk);
+        }
+        chunk = worldObj.getChunkFromBlockCoords(
+                xCoord - AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
+        if (!chunks.contains(chunk)) {
+            chunks.add(chunk);
+        }
+        chunk = worldObj.getChunkFromBlockCoords(
+                xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
+        if (!chunks.contains(chunk)) {
+            chunks.add(chunk);
+        }
+        return chunks;
+    }
+
+    @SuppressWarnings("unchecked")
+    private boolean searchChunkForBooster(Chunk chunk) {
+        Vec3 apiaryPos = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
+        for (Map.Entry<ChunkPosition, TileEntity> entry :
+                ((Map<ChunkPosition, TileEntity>) chunk.chunkTileEntityMap).entrySet()) {
+            TileEntity entity = entry.getValue();
+            if (entity instanceof IMagicApiaryAuraProvider) {
+                Vec3 tePos = Vec3.createVectorHelper(entity.xCoord, entity.yCoord, entity.zCoord);
+                Vec3 result = apiaryPos.subtract(tePos);
+                if (result.lengthVector() <= AURAPROVIDER_SEARCH_RADIUS) {
+                    saveAuraProviderPosition(entity.xCoord, entity.yCoord, entity.zCoord);
+                    this.auraProvider = (IMagicApiaryAuraProvider) entity;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void saveAuraProviderPosition(int x, int y, int z) {
+        auraProviderPosition = new ChunkCoords(worldObj.provider.dimensionId, x, y, z);
+    }
 
     private IMagicApiaryAuraProvider getAuraProvider(ChunkCoords coords) {
-		return getAuraProvider(coords.x, coords.y, coords.z);
-	}
-    
-	private IMagicApiaryAuraProvider getAuraProvider(int x, int y, int z) {
-		Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
-		x %= 16;
-		z %= 16;
-		if (x < 0) {
-			x += 16;
-		}
-		if (z < 0) {
-			z += 16;
-		}
-		ChunkPosition cPos = new ChunkPosition(x, y, z);
-		TileEntity entity = (TileEntity)chunk.chunkTileEntityMap.get(cPos);
+        return getAuraProvider(coords.x, coords.y, coords.z);
+    }
+
+    private IMagicApiaryAuraProvider getAuraProvider(int x, int y, int z) {
+        Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
+        x %= 16;
+        z %= 16;
+        if (x < 0) {
+            x += 16;
+        }
+        if (z < 0) {
+            z += 16;
+        }
+        ChunkPosition cPos = new ChunkPosition(x, y, z);
+        TileEntity entity = (TileEntity) chunk.chunkTileEntityMap.get(cPos);
         if (!(entity instanceof IMagicApiaryAuraProvider)) {
             return null;
         }
-        return (IMagicApiaryAuraProvider)entity;
+        return (IMagicApiaryAuraProvider) entity;
     }
 
     @Override
@@ -516,12 +514,12 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
         @Override
         public boolean addProduct(ItemStack product, boolean all) {
-            int countAdded = ItemStackUtils.addItemToInventory(magicApiary, product, SLOT_PRODUCTS_START, SLOT_PRODUCTS_COUNT);
+            int countAdded =
+                    ItemStackUtils.addItemToInventory(magicApiary, product, SLOT_PRODUCTS_START, SLOT_PRODUCTS_COUNT);
 
             if (all) {
                 return countAdded == product.stackSize;
-            }
-            else {
+            } else {
                 return countAdded > 0;
             }
         }
@@ -537,16 +535,15 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         public void setInventorySlotContents(int i, ItemStack itemStack) {
             items[i] = itemStack;
 
-            if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()){
+            if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
                 itemStack.stackSize = getInventoryStackLimit();
             }
         }
 
         public int[] getAccessibleSlotsFromSide(int side) {
             if (side == 0 || side == 1) {
-                return new int[] { SLOT_QUEEN, SLOT_DRONE };
-            }
-            else {
+                return new int[] {SLOT_QUEEN, SLOT_DRONE};
+            } else {
                 int[] slots = new int[SLOT_PRODUCTS_COUNT];
                 for (int i = 0, slot = SLOT_PRODUCTS_START; i < SLOT_PRODUCTS_COUNT; ++i, ++slot) {
                     slots[i] = slot;
@@ -556,18 +553,18 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         }
 
         public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-            if(slot == SLOT_QUEEN && BeeManager.beeRoot.isMember(itemStack)
+            if (slot == SLOT_QUEEN
+                    && BeeManager.beeRoot.isMember(itemStack)
                     && !BeeManager.beeRoot.isDrone(itemStack)) {
                 return true;
-            }
-            else if (slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack)) {
+            } else if (slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack)) {
                 return true;
             }
             return slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack);
         }
 
         public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-            switch (slot){
+            switch (slot) {
                 case SLOT_FRAME_START:
                 case SLOT_FRAME_START + 1:
                 case SLOT_FRAME_START + 2:
@@ -607,7 +604,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
                 if (itemStack != null) {
                     NBTTagCompound item = new NBTTagCompound();
-                    item.setByte("Slot", (byte)i);
+                    item.setByte("Slot", (byte) i);
                     itemStack.writeToNBT(item);
                     itemsNBT.appendTag(item);
                 }
@@ -683,7 +680,9 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
             IBeekeepingMode beekeepingMode = BeeManager.beeRoot.getBeekeepingMode(magicApiary.getWorldObj());
             int wear = Math.round(amount * beekeepingMode.getWearModifier());
 
-            for (int i = MagicApiaryInventory.SLOT_FRAME_START; i < MagicApiaryInventory.SLOT_FRAME_START + MagicApiaryInventory.SLOT_FRAME_COUNT; i++) {
+            for (int i = MagicApiaryInventory.SLOT_FRAME_START;
+                    i < MagicApiaryInventory.SLOT_FRAME_START + MagicApiaryInventory.SLOT_FRAME_COUNT;
+                    i++) {
                 ItemStack hiveFrameStack = magicApiary.getStackInSlot(i);
                 if (hiveFrameStack == null) {
                     continue;

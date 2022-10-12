@@ -10,17 +10,17 @@ public class SlotFrame extends SlotCustomItems {
     }
 
     @Override
-    public boolean isItemValid(ItemStack itemStack){
-        if (itemStack == null){
+    public boolean isItemValid(ItemStack itemStack) {
+        if (itemStack == null) {
             return false;
         }
-        if (!inventory.isItemValidForSlot(getSlotIndex(), itemStack)){
+        if (!inventory.isItemValidForSlot(getSlotIndex(), itemStack)) {
             return false;
         }
 
         boolean flag = false;
 
-        if(itemStack.getItem() instanceof IHiveFrame){
+        if (itemStack.getItem() instanceof IHiveFrame) {
             flag = true;
         }
 

@@ -19,39 +19,46 @@ public class ContainerMagicApiary extends ContainerMB {
     private static final int SLOT_QUEEN = 0;
     private static final int SLOT_DRONE = 1;
     private static final int SLOT_FRAME_START = 2;
-	private static final int SLOT_INVENTORY_START = 5;
+    private static final int SLOT_INVENTORY_START = 5;
     private static final int SLOT_FRAME_COUNT = 3;
     private static final int SLOT_INVENTORY_COUNT = 7;
 
-    public ContainerMagicApiary(InventoryPlayer inventoryPlayer, TileEntityMagicApiary thaumicApiary){
+    public ContainerMagicApiary(InventoryPlayer inventoryPlayer, TileEntityMagicApiary thaumicApiary) {
         this.apiary = thaumicApiary;
 
         // Queen/Princess slot
-        addSlotToContainer(new SlotCustomItems(this.apiary, 0, 29, 39, ItemInterface.getItemStack("Forestry", "beeQueenGE", 1), ItemInterface.getItemStack("Forestry", "beePrincessGE", 1)));
+        addSlotToContainer(new SlotCustomItems(
+                this.apiary,
+                0,
+                29,
+                39,
+                ItemInterface.getItemStack("Forestry", "beeQueenGE", 1),
+                ItemInterface.getItemStack("Forestry", "beePrincessGE", 1)));
         // Drone slot
-        addSlotToContainer(new SlotCustomItems(this.apiary, 1, 29, 65, ItemInterface.getItemStack("Forestry", "beeDroneGE", 64)));
+        addSlotToContainer(
+                new SlotCustomItems(this.apiary, 1, 29, 65, ItemInterface.getItemStack("Forestry", "beeDroneGE", 64)));
 
         int currentSlot = 1;
 
         // Frame slots
-        for (int x = 0; x < 3; x++){
+        for (int x = 0; x < 3; x++) {
             currentSlot++;
             addSlotToContainer(new SlotFrame(thaumicApiary, currentSlot, 66, 23 + x * 29));
-            //LogHelper.info("[1] CURRENTSLOT: " + currentSlot);
+            // LogHelper.info("[1] CURRENTSLOT: " + currentSlot);
         }
 
-        for (int x = 0; x < 3; x++){
+        for (int x = 0; x < 3; x++) {
             currentSlot++;
             addSlotToContainer(new Slot(thaumicApiary, currentSlot, 116, 26 + x * 26));
-            //LogHelper.info("[2] CURRENTSLOT: " + currentSlot);
+            // LogHelper.info("[2] CURRENTSLOT: " + currentSlot);
         }
 
         int j = 0;
-        for (int y = 0; y < 2; y++){
-            for (int x = 0; x < 2; x++){
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 2; x++) {
                 currentSlot++;
                 addSlotToContainer(new Slot(thaumicApiary, currentSlot, 95 + x * 42, 39 + j * 26));
-                //LogHelper.info("[3] CURRENTSLOT: " + currentSlot);
+                // LogHelper.info("[3] CURRENTSLOT: " + currentSlot);
             }
             j++;
         }
@@ -59,41 +66,39 @@ public class ContainerMagicApiary extends ContainerMB {
         addPlayerInventory(inventoryPlayer, 0, 110);
 
         maxSlot = currentSlot;
-
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex){
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
         Slot itemSlot = this.getSlot(slotIndex);
         boolean clearSlot = false;
 
         if (itemSlot != null && itemSlot.getHasStack()) {
             ItemStack srcStack = itemSlot.getStack();
 
-            if (slotIndex <= maxSlot && srcStack != null){
+            if (slotIndex <= maxSlot && srcStack != null) {
                 clearSlot = this.mergeItemStack(srcStack, maxSlot + 1, maxSlot + 36, false);
-            }else{
-                if (slotIndex > maxSlot && srcStack != null){
-                    if (BeeManager.beeRoot.isMember(srcStack)){
-                            if (!BeeManager.beeRoot.isDrone(srcStack)){
-                                if (this.getSlot(SLOT_QUEEN).getHasStack() == false) {
-                                    clearSlot = this.mergeItemStack(srcStack, SLOT_QUEEN, SLOT_QUEEN + 1, false);
-                                }
-                            }else{
-                                if (this.getSlot(SLOT_DRONE).isItemValid(srcStack)){
-                                    clearSlot = this.mergeItemStack(srcStack, SLOT_DRONE, SLOT_DRONE + 1, false);
-                                }
+            } else {
+                if (slotIndex > maxSlot && srcStack != null) {
+                    if (BeeManager.beeRoot.isMember(srcStack)) {
+                        if (!BeeManager.beeRoot.isDrone(srcStack)) {
+                            if (this.getSlot(SLOT_QUEEN).getHasStack() == false) {
+                                clearSlot = this.mergeItemStack(srcStack, SLOT_QUEEN, SLOT_QUEEN + 1, false);
                             }
-                    }else if(srcStack.getItem() instanceof IHiveFrame){
-                        clearSlot = this.mergeItemStack(srcStack, SLOT_FRAME_START, SLOT_FRAME_START + SLOT_FRAME_COUNT, false);
+                        } else {
+                            if (this.getSlot(SLOT_DRONE).isItemValid(srcStack)) {
+                                clearSlot = this.mergeItemStack(srcStack, SLOT_DRONE, SLOT_DRONE + 1, false);
+                            }
+                        }
+                    } else if (srcStack.getItem() instanceof IHiveFrame) {
+                        clearSlot = this.mergeItemStack(
+                                srcStack, SLOT_FRAME_START, SLOT_FRAME_START + SLOT_FRAME_COUNT, false);
                     }
                 }
             }
-
-
         }
 
-        if (clearSlot){
+        if (clearSlot) {
             itemSlot.putStack(null);
         }
 
@@ -107,7 +112,6 @@ public class ContainerMagicApiary extends ContainerMB {
     public boolean canInteractWith(EntityPlayer entityPlayer) {
         return apiary.isUseableByPlayer(entityPlayer);
     }
-
 
     @Override
     public void updateProgressBar(int i, int j) {
