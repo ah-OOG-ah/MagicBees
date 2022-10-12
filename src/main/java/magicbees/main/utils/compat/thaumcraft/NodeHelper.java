@@ -20,9 +20,9 @@ import thaumcraft.api.nodes.NodeModifier;
 import thaumcraft.api.nodes.NodeType;
 
 public class NodeHelper {
-	
+
 	private static Map<NodeType, Float> conversionChances;
-	
+
 	static {
 		conversionChances = new HashMap<NodeType,Float>();
 		conversionChances.put(NodeType.NORMAL, 0.075f);
@@ -48,10 +48,10 @@ public class NodeHelper {
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static List<INode> findNodesInChunkWithinRange(Chunk chunk, int x, int y, int z, int range) {
 		List<INode> nodes = new ArrayList<INode>();
@@ -68,7 +68,7 @@ public class NodeHelper {
                 }
             }
         }
-		
+
 		return nodes;
 	}
 
@@ -99,7 +99,7 @@ public class NodeHelper {
 	    }
 		return false;
 	}
-	
+
 	public static boolean growNodeInRange(List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord, int range) {
 		Collections.shuffle(chunks);
 		int attemptedNodes = 0;
@@ -117,11 +117,11 @@ public class NodeHelper {
 							++rollAttempts;
 						}
 						while (aspectsBase.getAmount(aspectToAdd) > (Config.thaumcraftNodeMaxSize -1) && rollAttempts < 20);
-						
+
 						if (20 <= rollAttempts) {
 							return false;
 						}
-						
+
 						short amount = (short)(1 + world.rand.nextInt(2));
 						aspectsBase.add(aspectToAdd, amount);
 						node.getAspects().add(aspectToAdd, amount);
@@ -165,7 +165,7 @@ public class NodeHelper {
 		}
 		return aspectToAdd;
 	}
-	
+
 	public static boolean repairNodeInRange(List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord, int range) {
 		Collections.shuffle(chunks);
 		for (Chunk chunk : chunks) {
@@ -195,7 +195,7 @@ public class NodeHelper {
 						}
 					}
 				}
-				
+
 				if (nodeChanged) {
 					updateNode(node, world);
 					return true;
@@ -204,8 +204,8 @@ public class NodeHelper {
 		}
 		return true;
 	}
-	
-	private static void updateNode(INode nearestNode, World world) {
+
+	public static void updateNode(INode nearestNode, World world) {
         if (nearestNode instanceof TileEntity) {
         	TileEntity tile = (TileEntity)nearestNode;
         	tile.markDirty();
@@ -227,7 +227,7 @@ public class NodeHelper {
 				else if (nodeType == NodeType.NORMAL) {
 					convertNodeToType(node, world, targetType);
 				}
-				
+
 				if (nodeChanged) {
 					updateNode(node, world);
 					return true;
@@ -236,7 +236,7 @@ public class NodeHelper {
 		}
 		return attemptedNodes < 10;
 	}
-	
+
 	public static boolean convertNodeToType(INode node, World world, NodeType type) {
 		if (world.rand.nextFloat() < conversionChances.get(type)) {
 			node.setNodeType(type);
