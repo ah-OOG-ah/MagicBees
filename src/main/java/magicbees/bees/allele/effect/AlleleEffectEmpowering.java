@@ -3,12 +3,11 @@ package magicbees.bees.allele.effect;
 import static magicbees.main.utils.compat.thaumcraft.NodeHelper.getWeightedRandomAspect;
 import static magicbees.main.utils.compat.thaumcraft.NodeHelper.updateNode;
 
-import cpw.mods.fml.common.Optional;
+import forestry.api.apiculture.IAlleleBeeAcceleratableEffect;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.apiculture.IBeeModifier;
 import forestry.api.genetics.IEffectData;
-import gregtech.api.interfaces.IAlleleBeeAcceleratableEffect;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +23,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
 
-@Optional.Interface(iface = "gregtech.api.interfaces.IAlleleBeeAcceleratableEffect", modid = "gregtech")
 public class AlleleEffectEmpowering extends AlleleEffect implements IAlleleBeeAcceleratableEffect {
 
     public AlleleEffectEmpowering(String id, boolean isDominant) {
@@ -56,7 +54,6 @@ public class AlleleEffectEmpowering extends AlleleEffect implements IAlleleBeeAc
         return storedData;
     }
 
-    @Optional.Method(modid = "gregtech")
     @Override
     public IEffectData doEffectAccelerated(IBeeGenome genome, IEffectData storedData, IBeeHousing housing, float did) {
         storedData.setInteger(0, 0);
