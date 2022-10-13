@@ -1,7 +1,7 @@
 package magicbees.client.gui;
 
-public enum UIScreens
-{
-	EFFECT_JAR,
-	THAUMIC_APIARY,;
+public enum UIScreens {
+    EFFECT_JAR,
+    THAUMIC_APIARY,
+    ;
 }
