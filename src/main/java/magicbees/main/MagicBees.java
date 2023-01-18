@@ -77,7 +77,6 @@ public class MagicBees {
         CraftingManager.setupCrafting();
         CraftingManager.registerLiquidContainers();
 
-        VersionInfo.doVersionCheck();
         LogHelper.info("Postinit completed");
     }
 
