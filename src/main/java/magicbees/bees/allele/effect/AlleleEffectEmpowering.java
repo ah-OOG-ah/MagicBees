@@ -3,25 +3,28 @@ package magicbees.bees.allele.effect;
 import static magicbees.main.utils.compat.thaumcraft.NodeHelper.getWeightedRandomAspect;
 import static magicbees.main.utils.compat.thaumcraft.NodeHelper.updateNode;
 
-import forestry.api.apiculture.IAlleleBeeAcceleratableEffect;
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.genetics.IEffectData;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockUtil;
 import magicbees.main.utils.compat.thaumcraft.NodeHelper;
+
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
+import forestry.api.apiculture.IAlleleBeeAcceleratableEffect;
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.genetics.IEffectData;
 
 public class AlleleEffectEmpowering extends AlleleEffect implements IAlleleBeeAcceleratableEffect {
 
@@ -43,8 +46,8 @@ public class AlleleEffectEmpowering extends AlleleEffect implements IAlleleBeeAc
         World world = housing.getWorld();
         ChunkCoordinates coords = housing.getCoordinates();
         IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
-        int range =
-                Math.max((int) Math.ceil(genome.getTerritory()[0] * beeModifier.getTerritoryModifier(genome, 1f)), 1);
+        int range = Math
+                .max((int) Math.ceil(genome.getTerritory()[0] * beeModifier.getTerritoryModifier(genome, 1f)), 1);
         List<Chunk> chunks = BlockUtil.getChunksInSearchRange(world, coords.posX, coords.posZ, range);
 
         if (NodeHelper.growNodeInRange(chunks, world, coords.posX, coords.posY, coords.posZ, range)) {
@@ -60,8 +63,8 @@ public class AlleleEffectEmpowering extends AlleleEffect implements IAlleleBeeAc
         World world = housing.getWorld();
         ChunkCoordinates coords = housing.getCoordinates();
         IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
-        int range =
-                Math.max((int) Math.ceil(genome.getTerritory()[0] * beeModifier.getTerritoryModifier(genome, 1f)), 1);
+        int range = Math
+                .max((int) Math.ceil(genome.getTerritory()[0] * beeModifier.getTerritoryModifier(genome, 1f)), 1);
         List<Chunk> chunks = BlockUtil.getChunksInSearchRange(world, coords.posX, coords.posZ, range);
 
         int idid = (int) did;

@@ -4,6 +4,7 @@ import forestry.api.genetics.IAlleleFloat;
 import forestry.api.genetics.IChromosomeType;
 
 public class AlleleFloat extends Allele implements IAlleleFloat {
+
     private float value;
 
     public AlleleFloat(String id, float val, boolean isDominant, IChromosomeType... chromosomeTypes) {

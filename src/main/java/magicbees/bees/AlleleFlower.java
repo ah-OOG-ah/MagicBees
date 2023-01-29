@@ -5,6 +5,7 @@ import forestry.api.genetics.IAlleleFlowers;
 import forestry.api.genetics.IFlowerProvider;
 
 public class AlleleFlower extends Allele implements IAlleleFlowers {
+
     private IFlowerProvider provider;
 
     public AlleleFlower(String uid, IFlowerProvider flowerProvider, boolean isDominant) {

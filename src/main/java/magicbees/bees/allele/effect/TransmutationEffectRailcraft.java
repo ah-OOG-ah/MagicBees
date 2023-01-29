@@ -1,8 +1,9 @@
 package magicbees.bees.allele.effect;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.Locale;
+
 import magicbees.api.bees.ITransmutationEffectLogic;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class TransmutationEffectRailcraft implements ITransmutationEffectLogic {
+
     @Override
     public boolean tryTransmutation(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z) {
         boolean flag = false;

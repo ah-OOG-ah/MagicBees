@@ -1,17 +1,20 @@
 package magicbees.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.block.types.HiveType;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * Created by Allen on 7/29/2014.
  */
 public class ItemMagicHive extends ItemBlock {
+
     public ItemMagicHive(Block block) {
         super(block);
         setMaxDamage(0);

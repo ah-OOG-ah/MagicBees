@@ -1,5 +1,13 @@
 package magicbees.main;
 
+import magicbees.bees.BeeManager;
+import magicbees.client.gui.GUIHandler;
+import magicbees.main.utils.CraftingManager;
+import magicbees.main.utils.IMCManager;
+import magicbees.main.utils.LogHelper;
+import magicbees.main.utils.VersionInfo;
+import magicbees.main.utils.compat.ModHelperManager;
+import magicbees.main.utils.net.NetworkEventHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -10,14 +18,6 @@ import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import magicbees.bees.BeeManager;
-import magicbees.client.gui.GUIHandler;
-import magicbees.main.utils.CraftingManager;
-import magicbees.main.utils.IMCManager;
-import magicbees.main.utils.LogHelper;
-import magicbees.main.utils.VersionInfo;
-import magicbees.main.utils.compat.ModHelperManager;
-import magicbees.main.utils.net.NetworkEventHandler;
 
 @Mod(
         modid = VersionInfo.ModName,

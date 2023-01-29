@@ -1,6 +1,7 @@
 package magicbees.item.types;
 
 import magicbees.main.utils.LocalizationManager;
+
 import net.minecraft.util.IIcon;
 
 public enum FluidType {
@@ -45,8 +46,8 @@ public enum FluidType {
     PYROTHEUM("pyrotheum"),
     CRYOTHEUM("cryotheum"),
     MANA("mana"),
-    COAL("coal"),
-    ;
+    COAL("coal"),;
+
     public String liquidID;
     public int iconIdx;
     public boolean available = false;

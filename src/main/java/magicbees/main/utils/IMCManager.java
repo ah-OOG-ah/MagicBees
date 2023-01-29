@@ -1,14 +1,17 @@
 package magicbees.main.utils;
 
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import magicbees.bees.allele.effect.AlleleEffectCrumbling;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
+
 public class IMCManager {
+
     public static void handle(IMCEvent event) {
         for (IMCMessage message : event.getMessages()) {
             try {
@@ -18,13 +21,15 @@ public class IMCManager {
                     FMLLog.warning(
                             "Magic Bees recieved an IMC Message from a mod %s "
                                     + "but does not support messages keyed with %s.",
-                            message.getSender(), message.key);
+                            message.getSender(),
+                            message.key);
                 }
             } catch (Exception e) {
                 FMLLog.warning(
                         "Magic Bees recieved an invalid IMC Message from a mod %s! Please inform "
                                 + "the author of %s that they may not be correctly implementing message for key '%s'. Error details follow.",
-                        message.getSender(), message.key);
+                        message.getSender(),
+                        message.key);
                 FMLLog.info(e.getMessage());
             }
         }

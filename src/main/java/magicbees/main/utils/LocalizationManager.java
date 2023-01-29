@@ -3,6 +3,7 @@ package magicbees.main.utils;
 import net.minecraft.util.StatCollector;
 
 public class LocalizationManager {
+
     public static String getLocalizedString(String key) {
         if (StatCollector.canTranslate(key)) {
             return StatCollector.translateToLocal(key);

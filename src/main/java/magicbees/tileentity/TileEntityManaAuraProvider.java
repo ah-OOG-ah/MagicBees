@@ -1,22 +1,24 @@
 package magicbees.tileentity;
 
-import cpw.mods.fml.common.Optional;
 import java.util.HashMap;
 import java.util.Map;
+
 import magicbees.api.bees.AuraChargeType;
 import magicbees.api.bees.IMagicApiaryAuraProvider;
 import magicbees.bees.AuraCharge;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.compat.BotaniaHelper;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
 import vazkii.botania.api.mana.IManaReceiver;
+import cpw.mods.fml.common.Optional;
 
 @Optional.InterfaceList({
-    @Optional.Interface(iface = "vazkii.botania.api.mana.IManaReceiver", modid = BotaniaHelper.Name)
-})
+        @Optional.Interface(iface = "vazkii.botania.api.mana.IManaReceiver", modid = BotaniaHelper.Name) })
 public class TileEntityManaAuraProvider extends TileEntity implements IMagicApiaryAuraProvider, IManaReceiver {
 
     public static final String tileEntityName = CommonProxy.DOMAIN + ".manaAuraProvider";
@@ -26,11 +28,12 @@ public class TileEntityManaAuraProvider extends TileEntity implements IMagicApia
     private static final int MAX_MANA = MANA_PER_CHARGE * 4;
 
     private static class ManaAuraCharge {
+
         int charges;
         int mana;
 
         public int[] toArray() {
-            return new int[] {charges, mana};
+            return new int[] { charges, mana };
         }
 
         public void fromArray(int[] array) {

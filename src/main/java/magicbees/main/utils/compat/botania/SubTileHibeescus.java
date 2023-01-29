@@ -1,21 +1,24 @@
 package magicbees.main.utils.compat.botania;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.apiculture.EnumBeeType;
-import forestry.api.apiculture.IBee;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import magicbees.bees.BeeManager;
 import magicbees.main.utils.compat.BotaniaHelper;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.subtile.SubTileFunctional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.apiculture.EnumBeeType;
+import forestry.api.apiculture.IBee;
 
 public class SubTileHibeescus extends SubTileFunctional {
 
@@ -92,8 +95,8 @@ public class SubTileHibeescus extends SubTileFunctional {
 
     private void findBeeItemToHold() {
         @SuppressWarnings("unchecked")
-        List<EntityItem> items =
-                supertile.getWorldObj().getEntitiesWithinAABB(EntityItem.class, getSearchBoundingBox());
+        List<EntityItem> items = supertile.getWorldObj()
+                .getEntitiesWithinAABB(EntityItem.class, getSearchBoundingBox());
 
         for (EntityItem itemEntity : items) {
             ItemStack item = itemEntity.getEntityItem();

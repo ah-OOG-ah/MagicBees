@@ -3,9 +3,10 @@ package magicbees.item.types;
 import magicbees.main.utils.LocalizationManager;
 
 public enum CapsuleType {
+
     MAGIC("magic", 2000, 0),
-    VOID("void", 8000, 1),
-    ;
+    VOID("void", 8000, 1),;
+
     private String name;
     public int capacity;
     public int iconIdx;

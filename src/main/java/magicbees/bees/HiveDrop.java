@@ -1,15 +1,18 @@
 package magicbees.bees;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
 import forestry.api.apiculture.EnumBeeType;
 import forestry.api.apiculture.IBee;
 import forestry.api.apiculture.IHiveDrop;
 import forestry.api.genetics.IAllele;
-import java.util.ArrayList;
-import java.util.Collection;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class HiveDrop implements IHiveDrop {
+
     private IAllele[] template;
     private int chance;
     private ItemStack[] bonus;

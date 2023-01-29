@@ -1,19 +1,23 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import magicbees.item.types.ResourceType;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.TabMagicBees;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemMiscResources extends Item {
+
     private IIcon[] icons = new IIcon[ResourceType.values().length];
 
     public ItemMiscResources() {
@@ -34,7 +38,7 @@ public class ItemMiscResources extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void getSubItems(Item item, CreativeTabs tabs, List list) {
         for (ResourceType type : ResourceType.values()) {
             if (type.showInList) {
@@ -46,8 +50,8 @@ public class ItemMiscResources extends Item {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister) {
         for (int i = 0; i < ResourceType.values().length; i++) {
-            this.icons[i] =
-                    par1IconRegister.registerIcon(CommonProxy.DOMAIN + ":" + ResourceType.values()[i].getName());
+            this.icons[i] = par1IconRegister
+                    .registerIcon(CommonProxy.DOMAIN + ":" + ResourceType.values()[i].getName());
         }
     }
 

@@ -1,17 +1,21 @@
 package magicbees.bees.allele.effect;
 
-import forestry.api.apiculture.BeeManager;
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.genetics.IEffectData;
 import java.util.List;
+
 import magicbees.bees.AlleleEffect;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
+import forestry.api.apiculture.BeeManager;
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.genetics.IEffectData;
+
 public class AlleleEffectPotion extends AlleleEffect {
+
     private int potionId;
     private int duration;
     private boolean isMalicious;

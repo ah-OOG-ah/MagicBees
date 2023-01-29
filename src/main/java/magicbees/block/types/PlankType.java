@@ -1,9 +1,9 @@
 package magicbees.block.types;
 
 public enum PlankType {
+
     GREATWOOD("greatwood", 48),
-    SILVERWOOD("silverwood", 49),
-    ;
+    SILVERWOOD("silverwood", 49),;
 
     public String name;
     public int textureIdx;

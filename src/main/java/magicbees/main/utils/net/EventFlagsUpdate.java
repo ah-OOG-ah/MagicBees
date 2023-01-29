@@ -1,15 +1,18 @@
 package magicbees.main.utils.net;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import magicbees.main.utils.ChunkCoords;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.net.NetworkEventHandler.EventType;
 import magicbees.tileentity.ITileEntityFlags;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class EventFlagsUpdate extends EventCoords {
 
@@ -64,9 +67,7 @@ public class EventFlagsUpdate extends EventCoords {
 
     @Override
     public void process(EntityPlayerMP player) {
-        TileEntity tile = FMLClientHandler.instance()
-                .getClient()
-                .theWorld
+        TileEntity tile = FMLClientHandler.instance().getClient().theWorld
                 .getTileEntity(getCoords().x, getCoords().y, getCoords().z);
 
         if (tile != null && tile instanceof ITileEntityFlags) {

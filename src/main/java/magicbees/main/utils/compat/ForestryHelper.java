@@ -1,31 +1,33 @@
 package magicbees.main.utils.compat;
 
-import forestry.api.apiculture.IAlleleBeeSpecies;
-import forestry.api.apiculture.hives.HiveManager;
-import forestry.api.apiculture.hives.IHiveRegistry;
-import forestry.api.core.EnumHumidity;
-import forestry.api.core.EnumTemperature;
-import forestry.api.genetics.IAllele;
 import java.util.Locale;
+
 import magicbees.bees.BeeManager;
 import magicbees.bees.HiveDescription;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.VersionInfo;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import forestry.api.apiculture.IAlleleBeeSpecies;
+import forestry.api.apiculture.hives.HiveManager;
+import forestry.api.apiculture.hives.IHiveRegistry;
+import forestry.api.core.EnumHumidity;
+import forestry.api.core.EnumTemperature;
+import forestry.api.genetics.IAllele;
+
 public class ForestryHelper implements IModHelper {
 
     public enum BlockResource {
         APATITE,
         COPPER,
-        TIN,
-        ;
+        TIN,;
     }
 
     public enum CraftingMaterial {
@@ -35,8 +37,7 @@ public class ForestryHelper implements IModHelper {
         WOVEN_SILK,
         DISSIPATION_CHARGE,
         ICE_SHARD,
-        SCENTED_PANELING,
-        ;
+        SCENTED_PANELING,;
     }
 
     public enum Comb {
@@ -55,30 +56,26 @@ public class ForestryHelper implements IModHelper {
         DARKENED,
         OMEGA,
         WHEATEN,
-        MOSSY,
-        ;
+        MOSSY,;
     }
 
     public enum Propolis {
         NORMAL,
         STICKY, // Unused.
         PULSATING,
-        SILKY,
-        ;
+        SILKY,;
     }
 
     public enum Pollen {
         NORMAL,
-        CRYSTALLINE,
-        ;
+        CRYSTALLINE,;
     }
 
     public enum CircuitBoard {
         BASIC,
         ENHANCED,
         REFINED,
-        INTRICATE,
-        ;
+        INTRICATE,;
     }
 
     public enum Tube {
@@ -93,13 +90,11 @@ public class ForestryHelper implements IModHelper {
         RUBBER,
         EMERALD,
         APATITE,
-        LAPIS,
-        ;
+        LAPIS,;
     }
 
     public enum ApicultureBlock {
-        APIARY,
-        ;
+        APIARY,;
     }
 
     public static final String Name = "Forestry";

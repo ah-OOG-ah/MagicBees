@@ -1,12 +1,15 @@
 package magicbees.world.feature;
 
 import java.util.Random;
+
 import magicbees.main.utils.BlockUtil;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class FeatureOreVein {
+
     public static final FeatureOreVein redstoneGen;
     public static final FeatureOreVein netherQuartzGen;
     public static final FeatureOreVein glowstoneGen;

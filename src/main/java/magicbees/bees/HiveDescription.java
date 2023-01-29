@@ -1,14 +1,10 @@
 package magicbees.bees;
 
-import forestry.api.apiculture.hives.HiveManager;
-import forestry.api.apiculture.hives.IHiveDescription;
-import forestry.api.apiculture.hives.IHiveGen;
-import forestry.api.core.EnumHumidity;
-import forestry.api.core.EnumTemperature;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
 import magicbees.block.types.HiveType;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockUtil;
@@ -17,47 +13,32 @@ import magicbees.world.feature.FeatureOreVein;
 import magicbees.world.feature.HiveGenNether;
 import magicbees.world.feature.HiveGenOblivion;
 import magicbees.world.feature.HiveGenUnderground;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
+import forestry.api.apiculture.hives.HiveManager;
+import forestry.api.apiculture.hives.IHiveDescription;
+import forestry.api.apiculture.hives.IHiveGen;
+import forestry.api.core.EnumHumidity;
+import forestry.api.core.EnumTemperature;
+
 public enum HiveDescription implements IHiveDescription {
-    CURIOUS(
-            HiveType.CURIOUS,
-            3.0f,
-            HiveManager.genHelper.tree(),
-            false,
-            BiomeDictionary.Type.FOREST,
-            BiomeDictionary.Type.PLAINS,
-            BiomeDictionary.Type.HILLS),
-    UNUSUAL(
-            HiveType.UNUSUAL,
-            1.0f,
-            HiveManager.genHelper.ground(Blocks.dirt, Blocks.grass),
-            false,
-            BiomeDictionary.Type.PLAINS,
-            BiomeDictionary.Type.MOUNTAIN,
-            BiomeDictionary.Type.HILLS,
+
+    CURIOUS(HiveType.CURIOUS, 3.0f, HiveManager.genHelper.tree(), false, BiomeDictionary.Type.FOREST,
+            BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.HILLS),
+    UNUSUAL(HiveType.UNUSUAL, 1.0f, HiveManager.genHelper.ground(Blocks.dirt, Blocks.grass), false,
+            BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS,
             BiomeDictionary.Type.RIVER),
-    RESONANT(
-            HiveType.RESONANT,
-            0.9f,
-            HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone),
-            false,
-            BiomeDictionary.Type.SANDY,
-            BiomeDictionary.Type.MESA,
-            BiomeDictionary.Type.HOT,
+    RESONANT(HiveType.RESONANT, 0.9f, HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone), false,
+            BiomeDictionary.Type.SANDY, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT,
             BiomeDictionary.Type.MAGICAL),
-    DEEP(
-            HiveType.DEEP,
-            5.0f,
-            new HiveGenUnderground(10, 15, 5),
-            true,
-            BiomeDictionary.Type.HILLS,
-            BiomeDictionary.Type.MOUNTAIN,
-            BiomeDictionary.Type.MAGICAL) {
+    DEEP(HiveType.DEEP, 5.0f, new HiveGenUnderground(10, 15, 5), true, BiomeDictionary.Type.HILLS,
+            BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.MAGICAL) {
+
         @Override
         public void postGen(World world, int x, int y, int z) {
             super.postGen(world, x, y, z);
@@ -71,6 +52,7 @@ public enum HiveDescription implements IHiveDescription {
         }
     },
     INFERNAL(HiveType.INFERNAL, 50.0f, new HiveGenNether(0, 175, 6), true, BiomeDictionary.Type.NETHER) {
+
         @Override
         public void postGen(World world, int x, int y, int z) {
             super.postGen(world, x, y, z);
@@ -83,13 +65,9 @@ public enum HiveDescription implements IHiveDescription {
             FeatureOreVein.netherQuartzGen.generateVein(world, random, x, y, z - 1, 4);
         }
     },
-    INFERNAL_OVERWORLD(
-            HiveType.INFERNAL,
-            0.95f,
-            new HiveGenUnderground(5, 13, 6),
-            true,
-            BiomeDictionary.Type.MAGICAL,
+    INFERNAL_OVERWORLD(HiveType.INFERNAL, 0.95f, new HiveGenUnderground(5, 13, 6), true, BiomeDictionary.Type.MAGICAL,
             BiomeDictionary.Type.HOT) {
+
         @Override
         public void postGen(World world, int x, int y, int z) {
             super.postGen(world, x, y, z);
@@ -110,6 +88,7 @@ public enum HiveDescription implements IHiveDescription {
         }
     },
     OBLIVION(HiveType.OBLIVION, 20.0f, new HiveGenOblivion(), true, BiomeDictionary.Type.END) {
+
         @Override
         public void postGen(World world, int x, int y, int z) {
             super.postGen(world, x, y, z);
@@ -120,13 +99,9 @@ public enum HiveDescription implements IHiveDescription {
             }
         }
     },
-    OBLIVION_OVERWORLD(
-            HiveType.OBLIVION,
-            0.87f,
-            new HiveGenUnderground(5, 5, 5),
-            true,
-            BiomeDictionary.Type.MAGICAL,
+    OBLIVION_OVERWORLD(HiveType.OBLIVION, 0.87f, new HiveGenUnderground(5, 5, 5), true, BiomeDictionary.Type.MAGICAL,
             BiomeDictionary.Type.COLD) {
+
         @Override
         public void postGen(World world, int x, int y, int z) {
             super.postGen(world, x, y, z);
@@ -149,11 +124,7 @@ public enum HiveDescription implements IHiveDescription {
     private final IHiveGen hiveGen;
     private final boolean spawnsIgnoreClimate;
 
-    private HiveDescription(
-            HiveType type,
-            float chance,
-            IHiveGen genType,
-            boolean ignoreClimate,
+    private HiveDescription(HiveType type, float chance, IHiveGen genType, boolean ignoreClimate,
             BiomeDictionary.Type... goodBiomeTypes) {
         hiveType = type;
         genChance = chance;
@@ -209,8 +180,9 @@ public enum HiveDescription implements IHiveDescription {
     @Override
     public void postGen(World world, int x, int y, int z) {
         if (logSpawns) {
-            LogHelper.info("Spawned " + this.toString().toLowerCase(Locale.ENGLISH) + " hive at: X " + x + ", Y: " + y
-                    + ", Z: " + z);
+            LogHelper.info(
+                    "Spawned " + this.toString()
+                            .toLowerCase(Locale.ENGLISH) + " hive at: X " + x + ", Y: " + y + ", Z: " + z);
         }
     }
 }

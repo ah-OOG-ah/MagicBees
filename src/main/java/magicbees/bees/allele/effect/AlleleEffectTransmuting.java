@@ -1,22 +1,24 @@
 package magicbees.bees.allele.effect;
 
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.genetics.IEffectData;
 import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.genetics.IEffectData;
+
 public class AlleleEffectTransmuting extends AlleleEffect {
 
     private TransmutationEffectController transmutationController;
 
-    public AlleleEffectTransmuting(
-            String id, boolean isDominant, TransmutationEffectController effectController, int timeoutBeeTicks) {
+    public AlleleEffectTransmuting(String id, boolean isDominant, TransmutationEffectController effectController,
+            int timeoutBeeTicks) {
         super(id, isDominant, timeoutBeeTicks);
         this.transmutationController = effectController;
     }
@@ -49,7 +51,9 @@ public class AlleleEffectTransmuting extends AlleleEffect {
                 world,
                 biome,
                 new ItemStack(
-                        world.getBlock(xCoord, yCoord, zCoord), 1, world.getBlockMetadata(xCoord, yCoord, zCoord)),
+                        world.getBlock(xCoord, yCoord, zCoord),
+                        1,
+                        world.getBlockMetadata(xCoord, yCoord, zCoord)),
                 xCoord,
                 yCoord,
                 zCoord);

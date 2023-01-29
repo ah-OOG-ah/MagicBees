@@ -1,12 +1,11 @@
 package magicbees.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.core.Tabs;
 import java.util.ArrayList;
 import java.util.List;
+
 import magicbees.block.types.HiveType;
 import magicbees.main.Config;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +17,12 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.core.Tabs;
+
 public class BlockHive extends Block {
+
     public BlockHive() {
         super(new MaterialHive());
         this.setLightLevel(0.8f);
@@ -47,7 +51,7 @@ public class BlockHive extends Block {
     }
 
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void getSubBlocks(Item item, CreativeTabs tab, List itemsList) {
         // Java bitches about raw types & types not being checked. Sorry, but the API sucks.

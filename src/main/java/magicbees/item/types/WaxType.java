@@ -3,6 +3,7 @@ package magicbees.item.types;
 import magicbees.main.utils.LocalizationManager;
 
 public enum WaxType {
+
     MAGIC("magic", true, 0xd242df),
     SOUL("soul", false, 0x967C63),
     AMNESIC("amnesic", true, 0x856DFF);

@@ -1,17 +1,20 @@
 package magicbees.bees.allele.effect;
 
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.genetics.IEffectData;
 import java.util.List;
+
 import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
 import magicbees.main.utils.BlockUtil;
 import magicbees.main.utils.compat.thaumcraft.NodeHelper;
+
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.genetics.IEffectData;
 
 public class AlleleEffectRecharge extends AlleleEffect {
 

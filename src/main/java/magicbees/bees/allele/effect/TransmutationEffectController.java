@@ -3,14 +3,17 @@ package magicbees.bees.allele.effect;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import magicbees.api.bees.ITransmutationEffectController;
 import magicbees.api.bees.ITransmutationEffectLogic;
 import magicbees.main.utils.LogHelper;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class TransmutationEffectController implements ITransmutationEffectController {
+
     private List<ITransmutationEffectLogic> logicObjects;
 
     public TransmutationEffectController(ITransmutationEffectLogic... effectLogic) {
@@ -28,9 +31,10 @@ public class TransmutationEffectController implements ITransmutationEffectContro
                     break;
                 }
             } catch (Exception e) {
-                LogHelper.warn(String.format(
-                        "Magic Bees encountered an issue with an ITransmutationEffectLogic provider %s. Debug information follows.",
-                        logic.getClass().getName()));
+                LogHelper.warn(
+                        String.format(
+                                "Magic Bees encountered an issue with an ITransmutationEffectLogic provider %s. Debug information follows.",
+                                logic.getClass().getName()));
                 LogHelper.info(e.getMessage());
             }
         }

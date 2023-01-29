@@ -1,9 +1,8 @@
 package magicbees.main.utils;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import forestry.api.recipes.RecipeManagers;
 import java.util.Hashtable;
 import java.util.Map;
+
 import magicbees.item.ItemCapsule;
 import magicbees.item.types.CombType;
 import magicbees.item.types.DropType;
@@ -18,6 +17,7 @@ import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalModsHelper;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -26,6 +26,9 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import forestry.api.recipes.RecipeManagers;
 
 public class CraftingManager {
 
@@ -110,31 +113,33 @@ public class CraftingManager {
                 'f',
                 Config.hiveFrameMagic);
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(Config.effectJar),
-                "GSG",
-                "QPQ",
-                "GGG",
-                'G',
-                Blocks.glass,
-                'S',
-                "slabWood",
-                'P',
-                Config.pollen.getStackForType(PollenType.UNUSUAL),
-                'Q',
-                Items.quartz));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(Config.effectJar),
+                        "GSG",
+                        "QPQ",
+                        "GGG",
+                        'G',
+                        Blocks.glass,
+                        'S',
+                        "slabWood",
+                        'P',
+                        Config.pollen.getStackForType(PollenType.UNUSUAL),
+                        'Q',
+                        Items.quartz));
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(Config.moonDial),
-                "DqD",
-                "qrq",
-                "DqD",
-                'r',
-                Items.redstone,
-                'q',
-                Items.quartz,
-                'D',
-                "dyeGreen"));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(Config.moonDial),
+                        "DqD",
+                        "qrq",
+                        "DqD",
+                        'r',
+                        Items.redstone,
+                        'q',
+                        Items.quartz,
+                        'D',
+                        "dyeGreen"));
 
         GameRegistry.addRecipe(
                 Config.miscResources.getStackForType(ResourceType.SKULL_FRAGMENT),
@@ -168,28 +173,30 @@ public class CraftingManager {
                 'e',
                 Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE));
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY),
-                "gwg",
-                "wiw",
-                "gwg",
-                'g',
-                Blocks.glass,
-                'w',
-                "waxMagical",
-                'i',
-                Blocks.iron_block));
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY),
-                "wgw",
-                "gig",
-                "wgw",
-                'g',
-                Blocks.glass,
-                'w',
-                "waxMagical",
-                'i',
-                Blocks.iron_block));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY),
+                        "gwg",
+                        "wiw",
+                        "gwg",
+                        'g',
+                        Blocks.glass,
+                        'w',
+                        "waxMagical",
+                        'i',
+                        Blocks.iron_block));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY),
+                        "wgw",
+                        "gig",
+                        "wgw",
+                        'g',
+                        Blocks.glass,
+                        'w',
+                        "waxMagical",
+                        'i',
+                        Blocks.iron_block));
 
         GameRegistry.addRecipe(
                 Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE),
@@ -362,29 +369,53 @@ public class CraftingManager {
         if (OreDictionary.getOres("ingotCopper").size() <= 0) {
             NuggetType.COPPER.setInactive();
         } else {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    OreDictionary.getOres("ingotCopper").get(0), "xxx", "xxx", "xxx", 'x', "nuggetCopper"));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            OreDictionary.getOres("ingotCopper").get(0),
+                            "xxx",
+                            "xxx",
+                            "xxx",
+                            'x',
+                            "nuggetCopper"));
         }
 
         if (OreDictionary.getOres("ingotTin").size() <= 0) {
             NuggetType.TIN.setInactive();
         } else {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    OreDictionary.getOres("ingotTin").get(0), "xxx", "xxx", "xxx", 'x', "nuggetTin"));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            OreDictionary.getOres("ingotTin").get(0),
+                            "xxx",
+                            "xxx",
+                            "xxx",
+                            'x',
+                            "nuggetTin"));
         }
 
         if (OreDictionary.getOres("ingotSilver").size() <= 0) {
             NuggetType.SILVER.setInactive();
         } else {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    OreDictionary.getOres("ingotSilver").get(0), "xxx", "xxx", "xxx", 'x', "nuggetSilver"));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            OreDictionary.getOres("ingotSilver").get(0),
+                            "xxx",
+                            "xxx",
+                            "xxx",
+                            'x',
+                            "nuggetSilver"));
         }
 
         if (OreDictionary.getOres("ingotLead").size() <= 0) {
             NuggetType.LEAD.setInactive();
         } else {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    OreDictionary.getOres("ingotLead").get(0), "xxx", "xxx", "xxx", 'x', "nuggetLead"));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            OreDictionary.getOres("ingotLead").get(0),
+                            "xxx",
+                            "xxx",
+                            "xxx",
+                            'x',
+                            "nuggetLead"));
         }
 
         GameRegistry.addRecipe(
@@ -396,13 +427,14 @@ public class CraftingManager {
         GameRegistry.addRecipe(
                 new ShapedOreRecipe(new ItemStack(Items.emerald), "xxx", "xxx", "xxx", 'x', "nuggetEmerald"));
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                ItemInterface.getItemStack("apatite"),
-                "xxx",
-                "xxx",
-                "xxx",
-                'x',
-                Config.nuggets.getStackForType(NuggetType.APATITE)));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        ItemInterface.getItemStack("apatite"),
+                        "xxx",
+                        "xxx",
+                        "xxx",
+                        'x',
+                        Config.nuggets.getStackForType(NuggetType.APATITE)));
 
         output = Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY);
         GameRegistry.addRecipe(
@@ -450,25 +482,28 @@ public class CraftingManager {
 
         for (int level = 1; level <= 8; level++) {
             output = new ItemStack(Config.magnet, 1, level * 2);
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    output,
-                    " d ",
-                    "mSm",
-                    " B ",
-                    'd',
-                    Items.diamond,
-                    'm',
-                    "mb.magnet.level" + (level - 1),
-                    'B',
-                    Blocks.redstone_block,
-                    'S',
-                    Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY)));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            output,
+                            " d ",
+                            "mSm",
+                            " B ",
+                            'd',
+                            Items.diamond,
+                            'm',
+                            "mb.magnet.level" + (level - 1),
+                            'B',
+                            Blocks.redstone_block,
+                            'S',
+                            Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY)));
         }
 
         if (ThaumcraftHelper.isActive()) {
             input = Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT);
             output = new ItemStack(
-                    ThaumcraftHelper.miscResource, 1, ThaumcraftHelper.MiscResource.KNOWLEDGE_FRAGMENT.ordinal());
+                    ThaumcraftHelper.miscResource,
+                    1,
+                    ThaumcraftHelper.MiscResource.KNOWLEDGE_FRAGMENT.ordinal());
             GameRegistry.addShapelessRecipe(output, input, input, input, input);
 
             if (Config.thaumaturgeBackpackActive) {
@@ -679,8 +714,8 @@ public class CraftingManager {
             output = newMap();
             output.put(Config.wax.getStackForType(WaxType.MAGIC), 0.55f);
             output.put(Config.drops.getStackForType(DropType.DESTABILIZED), 0.22f);
-            RecipeManagers.centrifugeManager.addRecipe(
-                    20, Config.combs.getStackForType(CombType.TE_DESTABILIZED), output);
+            RecipeManagers.centrifugeManager
+                    .addRecipe(20, Config.combs.getStackForType(CombType.TE_DESTABILIZED), output);
             output = newMap();
             output.put(Config.wax.getStackForType(WaxType.MAGIC), 0.55f);
             output.put(Config.drops.getStackForType(DropType.CARBON), 0.22f);
@@ -718,7 +753,15 @@ public class CraftingManager {
         input = ItemInterface.getItemStack("craftingMaterial");
         input.setItemDamage(ForestryHelper.CraftingMaterial.SILK_WISP.ordinal()); // Set to Silk Wisp
         RecipeManagers.carpenterManager.addRecipe(
-                30, new FluidStack(FluidRegistry.WATER, 600), null, output, "WSW", 'W', Config.wax, 'S', input);
+                30,
+                new FluidStack(FluidRegistry.WATER, 600),
+                null,
+                output,
+                "WSW",
+                'W',
+                Config.wax,
+                'S',
+                input);
 
         output = Config.miscResources.getStackForType(ResourceType.AROMATIC_LUMP, 2);
         RecipeManagers.carpenterManager.addRecipe(
@@ -799,9 +842,13 @@ public class CraftingManager {
                 FluidContainerRegistry.registerFluidContainer(liquid, filled, empty);
 
                 // Register with Squeezer/Bottler
-                // RecipeManagers.bottlerManager.addRecipe(5, liquid, empty, filled);  Outdated?
+                // RecipeManagers.bottlerManager.addRecipe(5, liquid, empty, filled); Outdated?
                 RecipeManagers.squeezerManager.addRecipe(
-                        10, new ItemStack[] {filled}, liquid, Config.wax.getStackForType(WaxType.MAGIC), 20);
+                        10,
+                        new ItemStack[] { filled },
+                        liquid,
+                        Config.wax.getStackForType(WaxType.MAGIC),
+                        20);
                 fluidType.available = true;
             }
         }

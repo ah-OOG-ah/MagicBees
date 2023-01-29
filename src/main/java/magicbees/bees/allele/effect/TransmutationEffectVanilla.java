@@ -1,6 +1,7 @@
 package magicbees.bees.allele.effect;
 
 import magicbees.api.bees.ITransmutationEffectLogic;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -9,6 +10,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class TransmutationEffectVanilla implements ITransmutationEffectLogic {
+
     @Override
     public boolean tryTransmutation(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z) {
         return trySpawnSandstone(world, biome, sourceBlock, x, y, z);

@@ -1,18 +1,21 @@
 package magicbees.bees.allele.effect;
 
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.genetics.IEffectData;
 import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.genetics.IEffectData;
+
 public class AlleleEffectSpawnMobWeighted extends AlleleEffect {
+
     private String[] entityNames;
     private int[] spawnChance;
 

@@ -1,13 +1,15 @@
 package magicbees.bees;
 
-import forestry.api.apiculture.EnumBeeChromosome;
-import forestry.api.apiculture.EnumBeeType;
-import forestry.api.genetics.IAllele;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.compat.ExtraBeesHelper;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import forestry.api.apiculture.EnumBeeChromosome;
+import forestry.api.apiculture.EnumBeeType;
+import forestry.api.genetics.IAllele;
 
 /**
  * Simply a class to hold all the functions to manage species' default genomes.
@@ -15,6 +17,7 @@ import net.minecraft.nbt.NBTTagList;
  * @author MysteriousAges
  */
 public class BeeGenomeManager {
+
     // Basic genome for All thaumic bees.
     private static IAllele[] getTemplateModBase() {
         IAllele[] genome = new IAllele[EnumBeeChromosome.values().length];

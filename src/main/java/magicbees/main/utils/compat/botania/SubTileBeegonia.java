@@ -1,19 +1,22 @@
 package magicbees.main.utils.compat.botania;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.apiculture.IAlleleBeeSpecies;
-import forestry.api.apiculture.IBee;
 import java.util.List;
+
 import magicbees.bees.BeeManager;
 import magicbees.main.utils.compat.BotaniaHelper;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.subtile.SubTileGenerating;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.apiculture.IAlleleBeeSpecies;
+import forestry.api.apiculture.IBee;
 
 public class SubTileBeegonia extends SubTileGenerating {
 
@@ -30,17 +33,15 @@ public class SubTileBeegonia extends SubTileGenerating {
             boolean needsSync = false;
 
             @SuppressWarnings("unchecked")
-            List<EntityItem> items = supertile
-                    .getWorldObj()
-                    .getEntitiesWithinAABB(
-                            EntityItem.class,
-                            AxisAlignedBB.getBoundingBox(
-                                    supertile.xCoord - RANGE,
-                                    supertile.yCoord - RANGE,
-                                    supertile.zCoord - RANGE,
-                                    supertile.xCoord + RANGE + 1,
-                                    supertile.yCoord + RANGE + 1,
-                                    supertile.zCoord + RANGE + 1));
+            List<EntityItem> items = supertile.getWorldObj().getEntitiesWithinAABB(
+                    EntityItem.class,
+                    AxisAlignedBB.getBoundingBox(
+                            supertile.xCoord - RANGE,
+                            supertile.yCoord - RANGE,
+                            supertile.zCoord - RANGE,
+                            supertile.xCoord + RANGE + 1,
+                            supertile.yCoord + RANGE + 1,
+                            supertile.zCoord + RANGE + 1));
             for (EntityItem item : items) {
                 if (item.age >= ITEM_STACK_AGE_THRESHOLD && !item.isDead) {
                     ItemStack stack = item.getEntityItem();
@@ -54,15 +55,13 @@ public class SubTileBeegonia extends SubTileGenerating {
                                     * BotaniaHelper.beegoniaManaMultiplier);
                             needsSync = true;
 
-                            supertile
-                                    .getWorldObj()
-                                    .playSoundEffect(
-                                            supertile.xCoord,
-                                            supertile.yCoord,
-                                            supertile.zCoord,
-                                            "botania:endoflame",
-                                            0.2F,
-                                            1F);
+                            supertile.getWorldObj().playSoundEffect(
+                                    supertile.xCoord,
+                                    supertile.yCoord,
+                                    supertile.zCoord,
+                                    "botania:endoflame",
+                                    0.2F,
+                                    1F);
                         }
 
                         if (stack.stackSize <= 0) {

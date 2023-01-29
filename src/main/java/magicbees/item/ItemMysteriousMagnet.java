@@ -1,16 +1,12 @@
 package magicbees.item;
 
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.TabMagicBees;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -24,6 +20,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Optional.Interface(modid = "Baubles", iface = "baubles.api.IBauble")
 public class ItemMysteriousMagnet extends Item implements IBauble {
@@ -43,7 +46,7 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4) {
         String s = LocalizationManager.getLocalizedString("misc.level", getMagnetLevel(itemStack));
         if (isMagnetActive(itemStack)) {
@@ -62,7 +65,7 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void getSubItems(Item item, CreativeTabs tabs, List list) {
         for (int i = 0; i <= getMaximumLevel(); i++) {
             list.add(new ItemStack(this, 1, i * 2));
@@ -169,7 +172,11 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
                         if ((arrow.canBePickedUp == 1 || world.rand.nextFloat() < 0.3f)
                                 && arrow.shootingEntity != entity) {
                             EntityItem replacement = new EntityItem(
-                                    world, arrow.posX, arrow.posY, arrow.posZ, new ItemStack(Items.arrow));
+                                    world,
+                                    arrow.posX,
+                                    arrow.posY,
+                                    arrow.posZ,
+                                    new ItemStack(Items.arrow));
                             world.spawnEntityInWorld(replacement);
                         }
                         world.removeEntity(arrow);

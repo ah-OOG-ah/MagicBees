@@ -1,16 +1,19 @@
 package magicbees.bees;
 
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
+
 import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.IAlleleBeeEffect;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
-import java.util.List;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
 
 public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect {
+
     protected int throttle;
     protected boolean combinable;
 
@@ -58,8 +61,8 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends Entity> List<T> getEntitiesWithinRange(
-            IBeeGenome genome, IBeeHousing housing, Class<T> entityClass) {
+    protected <T extends Entity> List<T> getEntitiesWithinRange(IBeeGenome genome, IBeeHousing housing,
+            Class<T> entityClass) {
         // Get the size of the affected area
         int[] area = genome.getTerritory();
         ChunkCoordinates coords = housing.getCoordinates();

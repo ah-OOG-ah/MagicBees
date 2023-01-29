@@ -1,14 +1,16 @@
 package magicbees.client.gui;
 
-import forestry.api.apiculture.IHiveFrame;
 import magicbees.bees.BeeManager;
 import magicbees.main.utils.ItemInterface;
 import magicbees.tileentity.TileEntityMagicApiary;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import forestry.api.apiculture.IHiveFrame;
 
 public class ContainerMagicApiary extends ContainerMB {
 
@@ -27,13 +29,14 @@ public class ContainerMagicApiary extends ContainerMB {
         this.apiary = thaumicApiary;
 
         // Queen/Princess slot
-        addSlotToContainer(new SlotCustomItems(
-                this.apiary,
-                0,
-                29,
-                39,
-                ItemInterface.getItemStack("Forestry", "beeQueenGE", 1),
-                ItemInterface.getItemStack("Forestry", "beePrincessGE", 1)));
+        addSlotToContainer(
+                new SlotCustomItems(
+                        this.apiary,
+                        0,
+                        29,
+                        39,
+                        ItemInterface.getItemStack("Forestry", "beeQueenGE", 1),
+                        ItemInterface.getItemStack("Forestry", "beePrincessGE", 1)));
         // Drone slot
         addSlotToContainer(
                 new SlotCustomItems(this.apiary, 1, 29, 65, ItemInterface.getItemStack("Forestry", "beeDroneGE", 64)));
@@ -91,8 +94,8 @@ public class ContainerMagicApiary extends ContainerMB {
                             }
                         }
                     } else if (srcStack.getItem() instanceof IHiveFrame) {
-                        clearSlot = this.mergeItemStack(
-                                srcStack, SLOT_FRAME_START, SLOT_FRAME_START + SLOT_FRAME_COUNT, false);
+                        clearSlot = this
+                                .mergeItemStack(srcStack, SLOT_FRAME_START, SLOT_FRAME_START + SLOT_FRAME_COUNT, false);
                     }
                 }
             }

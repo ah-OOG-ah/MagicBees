@@ -3,6 +3,7 @@ package magicbees.client.gui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author MysteriousAges
  */
 public class SlotCustomItems extends Slot {
+
     private List<ItemStack> items;
 
     public SlotCustomItems(IInventory inventory, int slotIndex, int xPos, int yPos, ItemStack... items) {

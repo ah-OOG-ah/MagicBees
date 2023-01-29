@@ -1,9 +1,11 @@
 package magicbees.main.utils.compat;
 
-import cpw.mods.fml.common.Loader;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
+
 import net.minecraft.block.Block;
+
+import cpw.mods.fml.common.Loader;
 
 public class ExtraBeesHelper implements IModHelper {
 
@@ -88,8 +90,7 @@ public class ExtraBeesHelper implements IModHelper {
         PULP,
         MULCH,
         COMPOST,
-        SAWDUST,
-        ;
+        SAWDUST,;
     }
 
     public static Block hiveBlock;

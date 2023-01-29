@@ -2,12 +2,15 @@ package magicbees.tileentity;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import magicbees.api.bees.AuraChargeType;
 import magicbees.api.bees.IMagicApiaryAuraProvider;
 import magicbees.bees.AuraCharge;
 import magicbees.main.CommonProxy;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.visnet.VisNetHandler;
 
@@ -27,11 +30,12 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
     }
 
     private static class VisAuraCharge {
+
         int charges;
         int vis;
 
         public int[] toArray() {
-            return new int[] {charges, vis};
+            return new int[] { charges, vis };
         }
 
         public void fromArray(int[] array) {

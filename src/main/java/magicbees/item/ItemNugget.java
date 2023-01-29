@@ -1,17 +1,21 @@
 package magicbees.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import magicbees.item.types.NuggetType;
 import magicbees.main.CommonProxy;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemNugget extends Item {
+
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
@@ -32,7 +36,7 @@ public class ItemNugget extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void getSubItems(Item item, CreativeTabs tab, List list) {
         for (NuggetType type : NuggetType.values()) {
             if (type.isActive()) {
@@ -45,9 +49,10 @@ public class ItemNugget extends Item {
     public void registerIcons(IIconRegister par1IconRegister) {
         this.icons = new IIcon[NuggetType.values().length];
         for (int i = 0; i < NuggetType.values().length; i++) {
-            this.icons[i] = par1IconRegister.registerIcon(CommonProxy.DOMAIN + ":nugget"
-                    + NuggetType.values()[i].name().substring(0, 1)
-                    + NuggetType.values()[i].name().substring(1).toLowerCase());
+            this.icons[i] = par1IconRegister.registerIcon(
+                    CommonProxy.DOMAIN + ":nugget"
+                            + NuggetType.values()[i].name().substring(0, 1)
+                            + NuggetType.values()[i].name().substring(1).toLowerCase());
         }
     }
 

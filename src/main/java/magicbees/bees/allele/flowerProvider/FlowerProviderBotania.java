@@ -1,15 +1,17 @@
 package magicbees.bees.allele.flowerProvider;
 
+import magicbees.main.utils.LocalizationManager;
+import magicbees.main.utils.compat.BotaniaHelper;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
+
 import forestry.api.genetics.IFlowerGrowthHelper;
 import forestry.api.genetics.IFlowerGrowthRule;
 import forestry.api.genetics.IFlowerRegistry;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
-import magicbees.main.utils.LocalizationManager;
-import magicbees.main.utils.compat.BotaniaHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class FlowerProviderBotania extends FlowerProvider implements IFlowerGrowthRule {
 
@@ -31,8 +33,8 @@ public class FlowerProviderBotania extends FlowerProvider implements IFlowerGrow
 
     @Override
     @Deprecated
-    public boolean growFlower(
-            IFlowerRegistry fr, String flowerType, World world, IIndividual individual, int x, int y, int z) {
+    public boolean growFlower(IFlowerRegistry fr, String flowerType, World world, IIndividual individual, int x, int y,
+            int z) {
         return growFlower(world, x, y, z);
     }
 

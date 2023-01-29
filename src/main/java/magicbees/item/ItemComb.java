@@ -1,20 +1,24 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.core.Tabs;
 import java.util.List;
+
 import magicbees.item.types.CombType;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ForestryHelper;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.core.Tabs;
+
 public class ItemComb extends Item {
+
     public ItemComb() {
         super();
         this.setCreativeTab(Tabs.tabApiculture);
@@ -31,7 +35,7 @@ public class ItemComb extends Item {
         return new ItemStack(this, count, type.ordinal());
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tabs, List list) {

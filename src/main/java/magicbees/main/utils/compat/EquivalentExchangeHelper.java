@@ -1,9 +1,11 @@
 package magicbees.main.utils.compat;
 
-import cpw.mods.fml.common.Loader;
 import magicbees.main.Config;
 import magicbees.main.utils.ItemInterface;
+
 import net.minecraft.item.Item;
+
+import cpw.mods.fml.common.Loader;
 
 public class EquivalentExchangeHelper implements IModHelper {
 

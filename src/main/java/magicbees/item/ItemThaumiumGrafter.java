@@ -1,10 +1,8 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.compat.ThaumcraftHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,13 +10,19 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
+
 import thaumcraft.api.IRepairableExtended;
 import thaumcraft.api.ThaumcraftApi;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-@Optional.InterfaceList({
-    @Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = ThaumcraftHelper.Name, striprefs = true)
-})
+@Optional.InterfaceList({ @Optional.Interface(
+        iface = "thaumcraft.api.IRepairableExtended",
+        modid = ThaumcraftHelper.Name,
+        striprefs = true) })
 public class ItemThaumiumGrafter extends ItemGrafter implements IRepairableExtended {
+
     public ItemThaumiumGrafter() {
         super();
         this.setMaxDamage(15);

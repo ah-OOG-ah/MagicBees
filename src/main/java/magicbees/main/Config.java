@@ -1,14 +1,8 @@
 package magicbees.main;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import forestry.api.apiculture.BeeManager;
-import forestry.api.storage.BackpackManager;
-import forestry.api.storage.EnumBackpackType;
 import java.io.File;
 import java.lang.reflect.Field;
+
 import magicbees.block.BlockEffectJar;
 import magicbees.block.BlockEnchantedEarth;
 import magicbees.block.BlockHive;
@@ -49,6 +43,7 @@ import magicbees.tileentity.TileEntityEffectJar;
 import magicbees.tileentity.TileEntityMagicApiary;
 import magicbees.tileentity.TileEntityManaAuraProvider;
 import magicbees.tileentity.TileEntityVisAuraProvider;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -59,12 +54,21 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import forestry.api.apiculture.BeeManager;
+import forestry.api.storage.BackpackManager;
+import forestry.api.storage.EnumBackpackType;
+
 /**
  * A class to hold some data related to mod state & functions.
  *
  * @author MysteriousAges
  */
 public class Config {
+
     public static final String CATEGORY_GENERAL = "general";
     public static final String CATEGORY_CLIENT = "client";
     public static final String CATEGORY_DEBUG = "debug";
@@ -291,8 +295,7 @@ public class Config {
         capsuleStackSizeMax = p.getInt();
 
         p = configuration.get(CATEGORY_GENERAL, "disableVersionNotification", false);
-        p.comment =
-                "Set to true to stop Magic Bees from notifying you when new updates are available. (Does not supress critical updates)";
+        p.comment = "Set to true to stop Magic Bees from notifying you when new updates are available. (Does not supress critical updates)";
         disableUpdateNotification = p.getBoolean(false);
 
         p = configuration.get(CATEGORY_GENERAL, "areMagicPlanksFlammable", false);
@@ -334,8 +337,7 @@ public class Config {
         magnetBaseRange = (float) p.getDouble(3.0);
 
         p = configuration.get(CATEGORY_GENERAL, "magnetRangeMultiplier", 0.75);
-        p.comment =
-                "Range multiplier per level of the Mysterious Magnet. Total range = base range + level * multiplier";
+        p.comment = "Range multiplier per level of the Mysterious Magnet. Total range = base range + level * multiplier";
         magnetLevelMultiplier = (float) p.getDouble(0.75);
 
         p = configuration.get(CATEGORY_GENERAL, "magnetMaximumLevel", 8);
@@ -343,8 +345,7 @@ public class Config {
         magnetMaxLevel = p.getInt();
 
         p = configuration.get(CATEGORY_GENERAL, "aromaticLumpSwarmerRate", 95);
-        p.comment =
-                "Aromatic lump swarmer rate. Final value is X/1000. 0 will disable, values outside of [0,1000] will be clamped to range. Default: 95";
+        p.comment = "Aromatic lump swarmer rate. Final value is X/1000. 0 will disable, values outside of [0,1000] will be clamped to range. Default: 95";
         aromaticLumpSwarmerRate = p.getInt();
 
         p = configuration.get(CATEGORY_CLIENT, "disableMagnetSound", false);
@@ -397,8 +398,7 @@ public class Config {
 
     private void setupJellyBaby() {
         jellyBaby = new ItemFood(1, false).setAlwaysEdible().setPotionEffect(Potion.moveSpeed.id, 5, 1, 1f);
-        jellyBaby
-                .setUnlocalizedName(CommonProxy.DOMAIN + ":jellyBabies")
+        jellyBaby.setUnlocalizedName(CommonProxy.DOMAIN + ":jellyBabies")
                 .setTextureName(CommonProxy.DOMAIN + ":jellyBabies");
         GameRegistry.registerItem(jellyBaby, "jellyBabies");
     }

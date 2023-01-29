@@ -1,19 +1,23 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.core.Tabs;
 import java.util.List;
+
 import magicbees.item.types.WaxType;
 import magicbees.main.CommonProxy;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.core.Tabs;
+
 public class ItemWax extends Item {
+
     @SideOnly(Side.CLIENT)
     private IIcon secondaryIcon;
 
@@ -47,7 +51,7 @@ public class ItemWax extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void getSubItems(Item item, CreativeTabs tabs, List list) {
         for (WaxType type : WaxType.values()) {
             list.add(this.getStackForType(type));

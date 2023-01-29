@@ -3,6 +3,7 @@ package magicbees.item.types;
 import magicbees.main.utils.LocalizationManager;
 
 public enum ResourceType {
+
     LORE_FRAGMENT("fragment", true),
     AROMATIC_LUMP("lump", true),
     EXTENDED_FERTILIZER("fertilizer", true),
@@ -29,10 +30,9 @@ public enum ResourceType {
     TC_DUST_CHAOS("TCchaosDust", true),
 
     // Dummy items for Thaumanomicon research icons.
-    //   These won't ever actually exist in-game, and so they can be moved around.
+    // These won't ever actually exist in-game, and so they can be moved around.
     RESEARCH_STARTNODE("startNode", false),
-    RESEARCH_BEEINFUSION("beeInfusion", false),
-    ;
+    RESEARCH_BEEINFUSION("beeInfusion", false),;
 
     private ResourceType(String n, boolean show) {
         this.name = n;

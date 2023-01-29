@@ -1,20 +1,24 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import magicbees.item.types.CapsuleType;
 import magicbees.item.types.FluidType;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.TabMagicBees;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemCapsule extends Item {
+
     private CapsuleType capsuleType;
 
     public ItemCapsule(CapsuleType type, int maxStackSize) {
@@ -34,14 +38,15 @@ public class ItemCapsule extends Item {
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
         return String.format(
-                this.capsuleType.getLocalizedName(), FluidType.values()[itemStack.getItemDamage()].getDisplayName());
+                this.capsuleType.getLocalizedName(),
+                FluidType.values()[itemStack.getItemDamage()].getDisplayName());
     }
 
     public ItemStack getCapsuleForLiquid(FluidType l) {
         return new ItemStack(this, 1, l.ordinal());
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tab, List itemList) {
@@ -60,9 +65,10 @@ public class ItemCapsule extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(CommonProxy.DOMAIN + ":capsule"
-                + this.capsuleType.getName().substring(0, 1).toUpperCase()
-                + this.capsuleType.getName().substring(1));
+        this.itemIcon = iconRegister.registerIcon(
+                CommonProxy.DOMAIN + ":capsule"
+                        + this.capsuleType.getName().substring(0, 1).toUpperCase()
+                        + this.capsuleType.getName().substring(1));
         for (FluidType t : FluidType.values()) {
             if (t != FluidType.EMPTY) {
                 t.liquidIcon = iconRegister.registerIcon(CommonProxy.DOMAIN + ":liquids/" + t.liquidID);

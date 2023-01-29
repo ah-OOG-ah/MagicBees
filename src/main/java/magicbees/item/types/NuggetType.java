@@ -1,9 +1,11 @@
 package magicbees.item.types;
 
 import magicbees.main.utils.LocalizationManager;
+
 import net.minecraft.item.Item;
 
 public enum NuggetType {
+
     IRON,
     COPPER,
     TIN,
@@ -11,8 +13,7 @@ public enum NuggetType {
     LEAD,
     DIAMOND,
     EMERALD,
-    APATITE,
-    ;
+    APATITE,;
 
     private Item targetIngot;
     private boolean active;
@@ -38,7 +39,6 @@ public enum NuggetType {
     }
 
     public String getName() {
-        return LocalizationManager.getLocalizedString(
-                "nugget." + this.toString().toLowerCase());
+        return LocalizationManager.getLocalizedString("nugget." + this.toString().toLowerCase());
     }
 }

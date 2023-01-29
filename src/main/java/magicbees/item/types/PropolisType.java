@@ -3,6 +3,7 @@ package magicbees.item.types;
 import magicbees.main.utils.LocalizationManager;
 
 public enum PropolisType {
+
     UNSTABLE("unstable", 0xEFB492),
 
     AIR("air", 0xA19E10),
@@ -10,8 +11,7 @@ public enum PropolisType {
     WATER("water", 0x1054A1),
     EARTH("earth", 0x00a000),
     ORDER("dull", 0xDDDDFF),
-    CHAOS("magic", 0x555577),
-    ;
+    CHAOS("magic", 0x555577),;
 
     private PropolisType(String pName, int overlayColour) {
         this.name = pName;

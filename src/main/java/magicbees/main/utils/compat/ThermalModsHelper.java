@@ -1,14 +1,16 @@
 package magicbees.main.utils.compat;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.registry.GameRegistry;
 import magicbees.item.types.DropType;
 import magicbees.main.Config;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ThermalModsHelper implements IModHelper {
 
@@ -19,8 +21,7 @@ public class ThermalModsHelper implements IModHelper {
         FluidCoal,
         FluidRedstone,
         FluidGlowstone,
-        FluidEnder,
-        ;
+        FluidEnder,;
     }
 
     public enum NuggetType {
@@ -29,15 +30,14 @@ public class ThermalModsHelper implements IModHelper {
         BRONZE,
         INVAR,
         NICKEL,
-        PLATINUM,
-        ;
+        PLATINUM,;
     }
 
     public enum Entity {
+
         BLIZZ("Blizz", "ThermalFoundation:mobBlizzBreathe0"),
         BLITZ("Blitz", "ThermalFoundation:mobBlitzBreathe1"),
-        BASALZ("Basalz", "ThermalFoundation:mobBasalzBreathe0"),
-        ;
+        BASALZ("Basalz", "ThermalFoundation:mobBasalzBreathe0"),;
 
         public final String entityID;
         public final String soundName;

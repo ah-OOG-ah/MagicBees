@@ -1,9 +1,9 @@
 package magicbees.bees.allele.effect;
 
+import magicbees.bees.AlleleEffect;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
-import magicbees.bees.AlleleEffect;
 
 public class AlleleEffectPlaceholder extends AlleleEffect {
 

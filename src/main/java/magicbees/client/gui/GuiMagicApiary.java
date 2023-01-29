@@ -1,19 +1,24 @@
 package magicbees.client.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.main.CommonProxy;
 import magicbees.tileentity.TileEntityMagicApiary;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiMagicApiary extends GuiContainer {
-    public static final ResourceLocation BACKGROUND_LOCATION =
-            new ResourceLocation(CommonProxy.DOMAIN, CommonProxy.GUI_TEXTURE + "apiary.png");
+
+    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(
+            CommonProxy.DOMAIN,
+            CommonProxy.GUI_TEXTURE + "apiary.png");
 
     private static final int WIDTH = 176;
     private static final int HEIGHT = 190;

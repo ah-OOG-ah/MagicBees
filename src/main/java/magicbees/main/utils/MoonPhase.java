@@ -7,6 +7,7 @@ import net.minecraft.world.World;
  * Class to abstract the moon phase from the world time a bit.
  */
 public enum MoonPhase {
+
     FULL("full"),
     WANING_GIBBOUS("gibbousWaning"),
     WANING_HALF("halfWaning"),

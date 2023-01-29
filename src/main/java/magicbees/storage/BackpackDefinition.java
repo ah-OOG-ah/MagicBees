@@ -1,10 +1,12 @@
 package magicbees.storage;
 
-import forestry.api.storage.IBackpackDefinition;
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import forestry.api.storage.IBackpackDefinition;
 
 /**
  * Backpack definition for Forestry.
@@ -12,6 +14,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author MysteriousAges
  */
 public class BackpackDefinition implements IBackpackDefinition {
+
     private ArrayList<ItemStack> items;
     private String key;
     private String name;
@@ -60,8 +63,7 @@ public class BackpackDefinition implements IBackpackDefinition {
             stack = this.items.get(i);
             // If comparison stack has meta of -1
             if (stack.getItem() == itemStack.getItem()) {
-                flag = stack.getItemDamage() == -1
-                        || stack.getItemDamage() == OreDictionary.WILDCARD_VALUE
+                flag = stack.getItemDamage() == -1 || stack.getItemDamage() == OreDictionary.WILDCARD_VALUE
                         || stack.getItemDamage() == itemStack.getItemDamage();
             }
         }

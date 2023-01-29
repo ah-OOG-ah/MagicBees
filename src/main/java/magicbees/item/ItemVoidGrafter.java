@@ -1,10 +1,8 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.compat.ThaumcraftHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -18,15 +16,22 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
+
 import thaumcraft.api.IRepairableExtended;
 import thaumcraft.api.IWarpingGear;
 import thaumcraft.api.ThaumcraftApi;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Optional.InterfaceList({
-    @Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = ThaumcraftHelper.Name, striprefs = true),
-    @Optional.Interface(iface = "thaumcraft.api.IWarpingGear", modid = ThaumcraftHelper.Name, striprefs = true)
-})
+        @Optional.Interface(
+                iface = "thaumcraft.api.IRepairableExtended",
+                modid = ThaumcraftHelper.Name,
+                striprefs = true),
+        @Optional.Interface(iface = "thaumcraft.api.IWarpingGear", modid = ThaumcraftHelper.Name, striprefs = true) })
 public class ItemVoidGrafter extends ItemGrafter implements IRepairableExtended, IWarpingGear {
+
     public ItemVoidGrafter() {
         super();
         this.setMaxDamage(10);
@@ -90,8 +95,7 @@ public class ItemVoidGrafter extends ItemGrafter implements IRepairableExtended,
 
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
         super.onUpdate(stack, world, entity, p_77663_4_, p_77663_5_);
-        if ((stack.isItemDamaged())
-                && (entity != null)
+        if ((stack.isItemDamaged()) && (entity != null)
                 && (entity.ticksExisted % 20 == 0)
                 && ((entity instanceof EntityLivingBase))) {
             stack.damageItem(-1, (EntityLivingBase) entity);
@@ -99,10 +103,8 @@ public class ItemVoidGrafter extends ItemGrafter implements IRepairableExtended,
     }
 
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        if ((!player.worldObj.isRemote)
-                && ((entity instanceof EntityLivingBase))
-                && ((!(entity instanceof EntityPlayer))
-                        || (MinecraftServer.getServer().isPVPEnabled()))) {
+        if ((!player.worldObj.isRemote) && ((entity instanceof EntityLivingBase))
+                && ((!(entity instanceof EntityPlayer)) || (MinecraftServer.getServer().isPVPEnabled()))) {
             ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.weakness.getId(), 80));
         }
         return super.onLeftClickEntity(stack, player, entity);

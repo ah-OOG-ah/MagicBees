@@ -1,7 +1,20 @@
 package magicbees.tileentity;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import magicbees.bees.BeeManager;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+
 import com.google.common.collect.ImmutableSet;
 import com.mojang.authlib.GameProfile;
+
 import forestry.api.apiculture.DefaultBeeListener;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
@@ -13,15 +26,6 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
 import forestry.api.core.IErrorLogic;
 import forestry.api.core.IErrorState;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import magicbees.bees.BeeManager;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 /**
  * Simulates enough of a bee house to fire the bee effects. =D
@@ -117,6 +121,7 @@ public class EffectJarHousing implements IBeeHousing {
     }
 
     private static class JarBeeHousingInventory implements IBeeHousingInventory {
+
         private final TileEntityEffectJar jarEntity;
 
         public JarBeeHousingInventory(TileEntityEffectJar jarEntity) {
@@ -180,6 +185,7 @@ public class EffectJarHousing implements IBeeHousing {
     }
 
     private static class JarHousingModifier implements IBeeModifier {
+
         @Override
         public float getTerritoryModifier(IBeeGenome genome, float currentModifier) {
             return 0.9f;

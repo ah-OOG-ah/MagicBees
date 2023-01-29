@@ -1,11 +1,8 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.core.IToolScoop;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.compat.ThaumcraftHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,13 +12,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
+
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.ThaumcraftApi;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.core.IToolScoop;
 
 @Optional.InterfaceList({
-    @Optional.Interface(iface = "thaumcraft.api.IRepairable", modid = ThaumcraftHelper.Name, striprefs = true)
-})
+        @Optional.Interface(iface = "thaumcraft.api.IRepairable", modid = ThaumcraftHelper.Name, striprefs = true) })
 public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop {
+
     public ItemThaumiumScoop() {
         super();
         this.setMaxStackSize(1);
@@ -42,8 +44,8 @@ public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop {
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack itemstack, World world, Block block, int j, int k, int l, EntityLivingBase entityliving) {
+    public boolean onBlockDestroyed(ItemStack itemstack, World world, Block block, int j, int k, int l,
+            EntityLivingBase entityliving) {
         itemstack.damageItem(1, entityliving);
         return true;
     }

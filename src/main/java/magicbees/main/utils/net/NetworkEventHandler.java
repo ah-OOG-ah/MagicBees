@@ -1,5 +1,21 @@
 package magicbees.main.utils.net;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+
+import magicbees.main.MagicBees;
+import magicbees.main.utils.ChunkCoords;
+import magicbees.main.utils.LogHelper;
+import magicbees.main.utils.VersionInfo;
+import magicbees.main.utils.error.InvalidEventTypeIndexException;
+import magicbees.tileentity.AuraCharges;
+import magicbees.tileentity.ITileEntityAuraCharged;
+
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.tileentity.TileEntity;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
@@ -9,19 +25,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import magicbees.main.MagicBees;
-import magicbees.main.utils.ChunkCoords;
-import magicbees.main.utils.LogHelper;
-import magicbees.main.utils.VersionInfo;
-import magicbees.main.utils.error.InvalidEventTypeIndexException;
-import magicbees.tileentity.AuraCharges;
-import magicbees.tileentity.ITileEntityAuraCharged;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.tileentity.TileEntity;
 
 public class NetworkEventHandler {
 
@@ -69,8 +72,8 @@ public class NetworkEventHandler {
         sendPacket(packet);
     }
 
-    public <T extends TileEntity & ITileEntityAuraCharged> void sendAuraChargeUpdate(
-            T entity, AuraCharges auraCharges) {
+    public <T extends TileEntity & ITileEntityAuraCharged> void sendAuraChargeUpdate(T entity,
+            AuraCharges auraCharges) {
         EventAuraChargeUpdate event = new EventAuraChargeUpdate(new ChunkCoords(entity), auraCharges);
         FMLProxyPacket packet = event.getPacket();
 

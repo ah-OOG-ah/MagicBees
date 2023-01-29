@@ -1,15 +1,12 @@
 package magicbees.main.utils.compat;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.bees.BeeManager;
 import magicbees.item.types.PollenType;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.compat.botania.BotaniaAPIDistanceHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -21,7 +18,12 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+
 import vazkii.botania.api.mana.ManaItemHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BotaniaHelper implements IModHelper {
 
@@ -61,8 +63,7 @@ public class BotaniaHelper implements IModHelper {
     public enum PastureSeed {
         GRASS,
         PODZOL,
-        MYCELIUM,
-        ;
+        MYCELIUM,;
     }
 
     public enum Rune {
@@ -81,8 +82,7 @@ public class BotaniaHelper implements IModHelper {
         SLOTH,
         WRATH,
         ENVY,
-        PRIDE,
-        ;
+        PRIDE,;
     }
 
     public static Block blockMysticalFlower;
@@ -136,49 +136,28 @@ public class BotaniaHelper implements IModHelper {
             // Hiveacynth would appreciate it if this list existed.
             BeeManager.populateSpeciesListRarity();
 
-            GameRegistry.addRecipe(new ItemStack(Config.manasteelScoop), new Object[] {
-                "twt",
-                "tmt",
-                " t ",
-                'm',
-                new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
-                'w',
-                Blocks.wool,
-                't',
-                Items.stick
-            });
-            manasteelScoopRecipe = (IRecipe) CraftingManager.getInstance()
-                    .getRecipeList()
+            GameRegistry.addRecipe(
+                    new ItemStack(Config.manasteelScoop),
+                    new Object[] { "twt", "tmt", " t ", 'm',
+                            new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()), 'w', Blocks.wool, 't',
+                            Items.stick });
+            manasteelScoopRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList()
                     .get(CraftingManager.getInstance().getRecipeList().size() - 1);
 
-            GameRegistry.addRecipe(new ItemStack(Config.manasteelGrafter), new Object[] {
-                "  m",
-                " t ",
-                "t  ",
-                'm',
-                new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
-                't',
-                Items.stick
-            });
-            manasteelGrafterRecipe = (IRecipe) CraftingManager.getInstance()
-                    .getRecipeList()
+            GameRegistry.addRecipe(
+                    new ItemStack(Config.manasteelGrafter),
+                    new Object[] { "  m", " t ", "t  ", 'm',
+                            new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()), 't', Items.stick });
+            manasteelGrafterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList()
                     .get(CraftingManager.getInstance().getRecipeList().size() - 1);
 
-            GameRegistry.addRecipe(new ItemStack(Config.manaAuraProvider), new Object[] {
-                "lsl",
-                "pmp",
-                "sss",
-                's',
-                blockLivingRock,
-                'm',
-                new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
-                'p',
-                Config.pollen.getStackForType(PollenType.UNUSUAL),
-                'l',
-                new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal())
-            });
-            manaBoosterRecipe = (IRecipe) CraftingManager.getInstance()
-                    .getRecipeList()
+            GameRegistry.addRecipe(
+                    new ItemStack(Config.manaAuraProvider),
+                    new Object[] { "lsl", "pmp", "sss", 's', blockLivingRock, 'm',
+                            new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()), 'p',
+                            Config.pollen.getStackForType(PollenType.UNUSUAL), 'l',
+                            new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()) });
+            manaBoosterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList()
                     .get(CraftingManager.getInstance().getRecipeList().size() - 1);
 
             BotaniaAPIDistanceHelper.setupCraftingAndLexicon();
@@ -217,28 +196,23 @@ public class BotaniaHelper implements IModHelper {
         hiveacynthManaMultiplier = p.getDouble();
 
         p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthRainResistRate", 0.1);
-        p.comment =
-                "Rate at which the Hiveacynth applies rain resist to spawned bees. Default: 0.1 Setting to 0 will disable.";
+        p.comment = "Rate at which the Hiveacynth applies rain resist to spawned bees. Default: 0.1 Setting to 0 will disable.";
         hiveacynthRainResistRate = p.getDouble();
 
         p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthPrincessSpawnRate", 0.09);
-        p.comment =
-                "Rate at which the Hiveacynth will spawn a Princess instead of a Drone. Default: 0.09. Setting to 0 will disable.";
+        p.comment = "Rate at which the Hiveacynth will spawn a Princess instead of a Drone. Default: 0.09. Setting to 0 will disable.";
         hiveacynthPrincessSpawnRate = p.getDouble();
 
         p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthPristineRate", 0.15);
-        p.comment =
-                "Rate at which the Hiveacynth will produce a Pristine Princess, when it produces a princess. Default: 0.15. Setting to 0 will disable, setting to 1 will make every Princess produced pristine..";
+        p.comment = "Rate at which the Hiveacynth will produce a Pristine Princess, when it produces a princess. Default: 0.15. Setting to 0 will disable, setting to 1 will make every Princess produced pristine..";
         hiveacynthPristineRate = p.getDouble();
 
         p = configuration.get(Config.CATEGORY_BOTANIA, "hibeescusManaCostMultiplier", 1.0);
-        p.comment =
-                "Multiplier on Hibeescus mana cost, base 10,000. Default 1.0. Setting to 0 makes you a huge cheater. <3";
+        p.comment = "Multiplier on Hibeescus mana cost, base 10,000. Default 1.0. Setting to 0 makes you a huge cheater. <3";
         hibeescusManaCostMultiplier = p.getDouble();
 
         p = configuration.get(Config.CATEGORY_BOTANIA, "hibeescusTicksMultiplier", 1.0);
-        p.comment =
-                "Multiplier for Hibeescus operation tick time. Multiplied against 1.5 Minecraft days with some extra randomness. Default: 1.0. Setting to 0 makes you a huge cheater. <3";
+        p.comment = "Multiplier for Hibeescus operation tick time. Multiplied against 1.5 Minecraft days with some extra randomness. Default: 1.0. Setting to 0 makes you a huge cheater. <3";
         hibeescusTicksMultiplier = p.getDouble();
     }
 

@@ -1,9 +1,7 @@
 package magicbees.tileentity;
 
-import com.mojang.authlib.GameProfile;
-import forestry.api.apiculture.IBee;
-import forestry.api.genetics.IEffectData;
 import magicbees.main.CommonProxy;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -12,7 +10,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 
+import com.mojang.authlib.GameProfile;
+
+import forestry.api.apiculture.IBee;
+import forestry.api.genetics.IEffectData;
+
 public class TileEntityEffectJar extends TileEntity implements IInventory {
+
     public static final String tileEntityName = CommonProxy.DOMAIN + ".effectJar";
     private static final int SLOT_COUNT = 2;
     public static final int DRONE_SLOT = 0;

@@ -1,26 +1,11 @@
 package magicbees.tileentity;
 
-import com.mojang.authlib.GameProfile;
-import forestry.api.apiculture.DefaultBeeListener;
-import forestry.api.apiculture.DefaultBeeModifier;
-import forestry.api.apiculture.IBee;
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeHousingInventory;
-import forestry.api.apiculture.IBeeListener;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.apiculture.IBeekeepingLogic;
-import forestry.api.apiculture.IBeekeepingMode;
-import forestry.api.apiculture.IHiveFrame;
-import forestry.api.core.EnumHumidity;
-import forestry.api.core.EnumTemperature;
-import forestry.api.core.ForestryAPI;
-import forestry.api.core.IErrorLogic;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import magicbees.api.bees.IMagicApiaryAuraProvider;
 import magicbees.bees.AuraCharge;
 import magicbees.bees.BeeManager;
@@ -29,6 +14,7 @@ import magicbees.main.utils.ChunkCoords;
 import magicbees.main.utils.ItemStackUtils;
 import magicbees.main.utils.net.EventAuraChargeUpdate;
 import magicbees.main.utils.net.NetworkEventHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -46,6 +32,24 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.Constants;
+
+import com.mojang.authlib.GameProfile;
+
+import forestry.api.apiculture.DefaultBeeListener;
+import forestry.api.apiculture.DefaultBeeModifier;
+import forestry.api.apiculture.IBee;
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeHousingInventory;
+import forestry.api.apiculture.IBeeListener;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.apiculture.IBeekeepingLogic;
+import forestry.api.apiculture.IBeekeepingMode;
+import forestry.api.apiculture.IHiveFrame;
+import forestry.api.core.EnumHumidity;
+import forestry.api.core.EnumTemperature;
+import forestry.api.core.ForestryAPI;
+import forestry.api.core.IErrorLogic;
 
 public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged {
 
@@ -356,8 +360,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         boolean auraChargesChanged = false;
 
         for (AuraCharge charge : AuraCharge.values()) {
-            if (auraCharges.isActive(charge)
-                    && auraCharges.isExpired(charge, worldObj)
+            if (auraCharges.isActive(charge) && auraCharges.isExpired(charge, worldObj)
                     && (auraProvider == null || !auraProvider.getCharge(charge.type))) {
                 auraCharges.stop(charge);
                 auraChargesChanged = true;
@@ -391,20 +394,22 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     private List<Chunk> getChunksInSearchRange() {
         List<Chunk> chunks = new ArrayList<Chunk>(4);
-        chunks.add(worldObj.getChunkFromBlockCoords(
-                xCoord - AURAPROVIDER_SEARCH_RADIUS, zCoord - AURAPROVIDER_SEARCH_RADIUS));
-        Chunk chunk = worldObj.getChunkFromBlockCoords(
-                xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord - AURAPROVIDER_SEARCH_RADIUS);
+        chunks.add(
+                worldObj.getChunkFromBlockCoords(
+                        xCoord - AURAPROVIDER_SEARCH_RADIUS,
+                        zCoord - AURAPROVIDER_SEARCH_RADIUS));
+        Chunk chunk = worldObj
+                .getChunkFromBlockCoords(xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord - AURAPROVIDER_SEARCH_RADIUS);
         if (!chunks.contains(chunk)) {
             chunks.add(chunk);
         }
-        chunk = worldObj.getChunkFromBlockCoords(
-                xCoord - AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
+        chunk = worldObj
+                .getChunkFromBlockCoords(xCoord - AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
         if (!chunks.contains(chunk)) {
             chunks.add(chunk);
         }
-        chunk = worldObj.getChunkFromBlockCoords(
-                xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
+        chunk = worldObj
+                .getChunkFromBlockCoords(xCoord + AURAPROVIDER_SEARCH_RADIUS, zCoord + AURAPROVIDER_SEARCH_RADIUS);
         if (!chunks.contains(chunk)) {
             chunks.add(chunk);
         }
@@ -414,8 +419,8 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     @SuppressWarnings("unchecked")
     private boolean searchChunkForBooster(Chunk chunk) {
         Vec3 apiaryPos = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
-        for (Map.Entry<ChunkPosition, TileEntity> entry :
-                ((Map<ChunkPosition, TileEntity>) chunk.chunkTileEntityMap).entrySet()) {
+        for (Map.Entry<ChunkPosition, TileEntity> entry : ((Map<ChunkPosition, TileEntity>) chunk.chunkTileEntityMap)
+                .entrySet()) {
             TileEntity entity = entry.getValue();
             if (entity instanceof IMagicApiaryAuraProvider) {
                 Vec3 tePos = Vec3.createVectorHelper(entity.xCoord, entity.yCoord, entity.zCoord);
@@ -477,6 +482,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     private static class MagicApiaryInventory implements IBeeHousingInventory {
+
         public static final int SLOT_QUEEN = 0;
         public static final int SLOT_DRONE = 1;
         public static final int SLOT_FRAME_START = 2;
@@ -514,8 +520,8 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
         @Override
         public boolean addProduct(ItemStack product, boolean all) {
-            int countAdded =
-                    ItemStackUtils.addItemToInventory(magicApiary, product, SLOT_PRODUCTS_START, SLOT_PRODUCTS_COUNT);
+            int countAdded = ItemStackUtils
+                    .addItemToInventory(magicApiary, product, SLOT_PRODUCTS_START, SLOT_PRODUCTS_COUNT);
 
             if (all) {
                 return countAdded == product.stackSize;
@@ -542,7 +548,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
         public int[] getAccessibleSlotsFromSide(int side) {
             if (side == 0 || side == 1) {
-                return new int[] {SLOT_QUEEN, SLOT_DRONE};
+                return new int[] { SLOT_QUEEN, SLOT_DRONE };
             } else {
                 int[] slots = new int[SLOT_PRODUCTS_COUNT];
                 for (int i = 0, slot = SLOT_PRODUCTS_START; i < SLOT_PRODUCTS_COUNT; ++i, ++slot) {
@@ -553,8 +559,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         }
 
         public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-            if (slot == SLOT_QUEEN
-                    && BeeManager.beeRoot.isMember(itemStack)
+            if (slot == SLOT_QUEEN && BeeManager.beeRoot.isMember(itemStack)
                     && !BeeManager.beeRoot.isDrone(itemStack)) {
                 return true;
             } else if (slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack)) {
@@ -680,9 +685,8 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
             IBeekeepingMode beekeepingMode = BeeManager.beeRoot.getBeekeepingMode(magicApiary.getWorldObj());
             int wear = Math.round(amount * beekeepingMode.getWearModifier());
 
-            for (int i = MagicApiaryInventory.SLOT_FRAME_START;
-                    i < MagicApiaryInventory.SLOT_FRAME_START + MagicApiaryInventory.SLOT_FRAME_COUNT;
-                    i++) {
+            for (int i = MagicApiaryInventory.SLOT_FRAME_START; i
+                    < MagicApiaryInventory.SLOT_FRAME_START + MagicApiaryInventory.SLOT_FRAME_COUNT; i++) {
                 ItemStack hiveFrameStack = magicApiary.getStackInSlot(i);
                 if (hiveFrameStack == null) {
                     continue;

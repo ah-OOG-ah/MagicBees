@@ -3,10 +3,10 @@ package magicbees.bees;
 import magicbees.api.bees.AuraChargeType;
 
 public enum AuraCharge {
+
     MUTATION(AuraChargeType.MUTATION, 850, 11),
     DEATH(AuraChargeType.DEATH, 400, 5),
-    PRODUCTION(AuraChargeType.PRODUCTION, 300, 3),
-    ;
+    PRODUCTION(AuraChargeType.PRODUCTION, 300, 3),;
 
     public final AuraChargeType type;
     public final int duration;

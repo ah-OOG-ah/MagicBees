@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import magicbees.main.Config;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
@@ -35,8 +38,8 @@ public class NodeHelper {
         if (chunk == null) return null;
 
         Vec3 apiaryPos = Vec3.createVectorHelper(x, y, z);
-        List<TileEntity> tileEntities =
-                new ArrayList<TileEntity>(((Map<ChunkPosition, TileEntity>) chunk.chunkTileEntityMap).values());
+        List<TileEntity> tileEntities = new ArrayList<TileEntity>(
+                ((Map<ChunkPosition, TileEntity>) chunk.chunkTileEntityMap).values());
         Collections.shuffle(tileEntities);
         for (TileEntity entity : tileEntities) {
             if (entity instanceof INode) {
@@ -56,8 +59,8 @@ public class NodeHelper {
         List<INode> nodes = new ArrayList<INode>();
         if (chunk != null) {
             Vec3 apiaryPos = Vec3.createVectorHelper(x, y, z);
-            List<TileEntity> tileEntities =
-                    new ArrayList<TileEntity>(((Map<ChunkPosition, TileEntity>) chunk.chunkTileEntityMap).values());
+            List<TileEntity> tileEntities = new ArrayList<TileEntity>(
+                    ((Map<ChunkPosition, TileEntity>) chunk.chunkTileEntityMap).values());
             for (TileEntity entity : tileEntities) {
                 if (entity instanceof INode) {
                     Vec3 tePos = Vec3.createVectorHelper(entity.xCoord, entity.yCoord, entity.zCoord);
@@ -72,8 +75,8 @@ public class NodeHelper {
         return nodes;
     }
 
-    public static boolean rechargeNodeInRange(
-            List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord, int range) {
+    public static boolean rechargeNodeInRange(List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord,
+            int range) {
         Collections.shuffle(chunks);
         for (Chunk chunk : chunks) {
             INode nearestNode = findNode(chunk, xCoord, yCoord, zCoord, range);
@@ -100,8 +103,8 @@ public class NodeHelper {
         return false;
     }
 
-    public static boolean growNodeInRange(
-            List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord, int range) {
+    public static boolean growNodeInRange(List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord,
+            int range) {
         Collections.shuffle(chunks);
         int attemptedNodes = 0;
         for (Chunk chunk : chunks) {
@@ -166,8 +169,8 @@ public class NodeHelper {
         return aspectToAdd;
     }
 
-    public static boolean repairNodeInRange(
-            List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord, int range) {
+    public static boolean repairNodeInRange(List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord,
+            int range) {
         Collections.shuffle(chunks);
         for (Chunk chunk : chunks) {
             INode node = findNode(chunk, xCoord, yCoord, zCoord, range);
@@ -211,8 +214,8 @@ public class NodeHelper {
         }
     }
 
-    public static boolean convertNodeInRangeToType(
-            List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord, int range, NodeType targetType) {
+    public static boolean convertNodeInRangeToType(List<Chunk> chunks, World world, int xCoord, int yCoord, int zCoord,
+            int range, NodeType targetType) {
         Collections.shuffle(chunks);
         int attemptedNodes = 0;
         boolean nodeChanged = false;

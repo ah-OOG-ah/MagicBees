@@ -3,6 +3,7 @@ package magicbees.main.utils.compat.botania;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
 import vazkii.botania.api.subtile.signature.SubTileSignature;
 
 public class BotaniaSignature extends SubTileSignature {

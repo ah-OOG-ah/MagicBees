@@ -1,18 +1,22 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.core.Tabs;
 import java.util.List;
+
 import magicbees.item.types.PropolisType;
 import magicbees.main.utils.compat.ForestryHelper;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.core.Tabs;
+
 public class ItemPropolis extends Item {
+
     public ItemPropolis() {
         super();
         this.setCreativeTab(Tabs.tabApiculture);
@@ -31,7 +35,7 @@ public class ItemPropolis extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void getSubItems(Item item, CreativeTabs tabs, List list) {
         for (PropolisType type : PropolisType.values()) {
             list.add(this.getStackForType(type));

@@ -1,8 +1,8 @@
 package magicbees.item;
 
-import forestry.api.arboriculture.IToolGrafter;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ThaumcraftHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -10,6 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import forestry.api.arboriculture.IToolGrafter;
 
 public class ItemGrafter extends Item implements IToolGrafter {
 
@@ -26,8 +28,8 @@ public class ItemGrafter extends Item implements IToolGrafter {
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack itemstack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(ItemStack itemstack, World world, Block block, int x, int y, int z,
+            EntityLivingBase entityLiving) {
         int damage = 1;
         if (ThaumcraftHelper.isActive()) {
             if (block == ThaumcraftHelper.leaf) {

@@ -1,11 +1,13 @@
 package magicbees.bees.allele.flowerProvider;
 
+import java.util.Set;
+
+import net.minecraft.block.Block;
+
 import forestry.api.apiculture.FlowerManager;
 import forestry.api.genetics.IFlower;
 import forestry.api.genetics.IFlowerGrowthRule;
 import forestry.api.genetics.IFlowerProvider;
-import java.util.Set;
-import net.minecraft.block.Block;
 
 public abstract class FlowerProvider implements IFlowerProvider {
 

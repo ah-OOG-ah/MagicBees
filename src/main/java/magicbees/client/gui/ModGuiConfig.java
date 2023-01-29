@@ -1,16 +1,20 @@
 package magicbees.client.gui;
 
-import cpw.mods.fml.client.config.DummyConfigElement;
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.IConfigElement;
 import java.util.ArrayList;
 import java.util.List;
+
 import magicbees.main.Config;
 import magicbees.main.utils.VersionInfo;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 
+import cpw.mods.fml.client.config.DummyConfigElement;
+import cpw.mods.fml.client.config.GuiConfig;
+import cpw.mods.fml.client.config.IConfigElement;
+
 public class ModGuiConfig extends GuiConfig {
+
     public ModGuiConfig(GuiScreen guiScreen) {
         super(
                 guiScreen,
@@ -34,6 +38,8 @@ public class ModGuiConfig extends GuiConfig {
 
     private static IConfigElement categoryElement(String category, String name, String tooltip_key) {
         return new DummyConfigElement.DummyCategoryElement(
-                name, tooltip_key, new ConfigElement(Config.configuration.getCategory(category)).getChildElements());
+                name,
+                tooltip_key,
+                new ConfigElement(Config.configuration.getCategory(category)).getChildElements());
     }
 }

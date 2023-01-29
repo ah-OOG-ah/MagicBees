@@ -1,6 +1,7 @@
 package magicbees.main;
 
 public class CommonProxy {
+
     public static final String DOMAIN = "magicbees";
     public static final String TEXTURE = "textures/";
     public static final String GUI_TEXTURE = TEXTURE + "gui/";

@@ -1,9 +1,11 @@
 package magicbees.main.utils.compat;
 
+import magicbees.main.Config;
+
+import net.minecraft.block.Block;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import magicbees.main.Config;
-import net.minecraft.block.Block;
 
 public class AppliedEnergisticsHelper implements IModHelper {
 
@@ -29,7 +31,8 @@ public class AppliedEnergisticsHelper implements IModHelper {
     }
 
     public void postInit() {
-        /*if (isActive()) {
-        }*/
+        /*
+         * if (isActive()) { }
+         */
     }
 }

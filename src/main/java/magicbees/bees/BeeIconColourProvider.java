@@ -1,10 +1,12 @@
 package magicbees.bees;
 
-import forestry.api.apiculture.IBeeIconColourProvider;
 import java.awt.Color;
+
+import forestry.api.apiculture.IBeeIconColourProvider;
 
 public enum BeeIconColourProvider implements IBeeIconColourProvider {
     RAINBOW {
+
         @Override
         public int getIconColour(int renderPass) {
             if (renderPass == 0) {

@@ -1,16 +1,18 @@
 package magicbees.bees.allele.flowerProvider;
 
+import magicbees.main.utils.LocalizationManager;
+import magicbees.main.utils.compat.ThaumcraftHelper;
+
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
 import forestry.api.genetics.IFlowerGrowthHelper;
 import forestry.api.genetics.IFlowerGrowthRule;
 import forestry.api.genetics.IFlowerRegistry;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
-import magicbees.main.utils.LocalizationManager;
-import magicbees.main.utils.compat.ThaumcraftHelper;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class FlowerProviderThaumcraftFlower extends FlowerProvider implements IFlowerGrowthRule {
 
@@ -53,8 +55,8 @@ public class FlowerProviderThaumcraftFlower extends FlowerProvider implements IF
 
     @Override
     @Deprecated
-    public boolean growFlower(
-            IFlowerRegistry fr, String flowerType, World world, IIndividual individual, int x, int y, int z) {
+    public boolean growFlower(IFlowerRegistry fr, String flowerType, World world, IIndividual individual, int x, int y,
+            int z) {
         return growFlower(world, x, y, z);
     }
 

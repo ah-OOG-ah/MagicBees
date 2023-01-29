@@ -1,12 +1,10 @@
 package magicbees.bees.allele.effect;
 
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.genetics.IEffectData;
 import java.util.List;
+
 import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
+
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,7 +13,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.genetics.IEffectData;
+
 public class AlleleEffectSpawnMob extends AlleleEffect {
+
     protected boolean aggosOnPlayer;
     protected boolean spawnsWhilePlayerNear;
     protected String alternateMob;
@@ -111,8 +115,8 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
         return null;
     }
 
-    protected boolean spawnMob(
-            IBeeGenome bee, EntityPlayer player, World world, IBeeHousing housing, boolean spawnAlternate) {
+    protected boolean spawnMob(IBeeGenome bee, EntityPlayer player, World world, IBeeHousing housing,
+            boolean spawnAlternate) {
         boolean spawnedFlag = false;
 
         EntityLiving mob;
@@ -126,15 +130,14 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
             double pos[] = this.randomMobSpawnCoords(world, bee, housing);
 
             int entitiesCount = world.getEntitiesWithinAABB(
-                            mob.getClass(),
-                            AxisAlignedBB.getBoundingBox(
-                                            (int) pos[0],
-                                            (int) pos[1],
-                                            (int) pos[2],
-                                            (int) pos[0] + 1,
-                                            (int) pos[1] + 1,
-                                            (int) pos[2] + 1)
-                                    .expand(8.0D, 4.0D, 8.0D))
+                    mob.getClass(),
+                    AxisAlignedBB.getBoundingBox(
+                            (int) pos[0],
+                            (int) pos[1],
+                            (int) pos[2],
+                            (int) pos[0] + 1,
+                            (int) pos[1] + 1,
+                            (int) pos[2] + 1).expand(8.0D, 4.0D, 8.0D))
                     .size();
 
             mob.setPositionAndRotation(pos[0], pos[1], pos[2], world.rand.nextFloat() * 360f, 0f);
@@ -142,9 +145,8 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
             if (entitiesCount < maxMobsInArea && mob.getCanSpawnHere()) {
                 spawnedFlag = world.spawnEntityInWorld(mob);
                 if (aggosOnPlayer && player != null) {
-                    if (forestry.api.apiculture.BeeManager.armorApiaristHelper.wearsItems(
-                                    (EntityLivingBase) player, getUID(), true)
-                            < 4) {
+                    if (forestry.api.apiculture.BeeManager.armorApiaristHelper
+                            .wearsItems((EntityLivingBase) player, getUID(), true) < 4) {
                         // Protect fully suited player from initial murder intent.
                         mob.setAttackTarget(player);
                     }

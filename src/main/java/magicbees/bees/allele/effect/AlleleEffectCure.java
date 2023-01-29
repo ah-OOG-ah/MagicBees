@@ -1,13 +1,16 @@
 package magicbees.bees.allele.effect;
 
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.genetics.IEffectData;
 import java.util.List;
+
 import magicbees.bees.AlleleEffect;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.genetics.IEffectData;
 
 public class AlleleEffectCure extends AlleleEffect {
 

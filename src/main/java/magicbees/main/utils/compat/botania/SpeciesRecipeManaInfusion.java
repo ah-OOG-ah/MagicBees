@@ -1,13 +1,15 @@
 package magicbees.main.utils.compat.botania;
 
-import forestry.api.apiculture.EnumBeeType;
-import forestry.api.apiculture.IAlleleBeeSpecies;
-import forestry.api.apiculture.IBee;
 import magicbees.bees.BeeManager;
 import magicbees.bees.BeeSpecies;
 import magicbees.main.utils.compat.ForestryHelper;
+
 import net.minecraft.item.ItemStack;
+
 import vazkii.botania.api.recipe.RecipeManaInfusion;
+import forestry.api.apiculture.EnumBeeType;
+import forestry.api.apiculture.IAlleleBeeSpecies;
+import forestry.api.apiculture.IBee;
 
 public class SpeciesRecipeManaInfusion extends RecipeManaInfusion {
 

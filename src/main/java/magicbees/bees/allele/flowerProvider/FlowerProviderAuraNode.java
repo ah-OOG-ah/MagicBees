@@ -1,11 +1,13 @@
 package magicbees.bees.allele.flowerProvider;
 
-import forestry.api.genetics.IIndividual;
-import forestry.api.genetics.IPollinatable;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.compat.ThaumcraftHelper;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import forestry.api.genetics.IIndividual;
+import forestry.api.genetics.IPollinatable;
 
 public class FlowerProviderAuraNode extends FlowerProvider {
 
@@ -45,8 +47,7 @@ public class FlowerProviderAuraNode extends FlowerProvider {
             if (stack.getItem() == itemStack.getItem() && stack.getItemDamage() == itemStack.getItemDamage()) {
                 if (stack.stackSize < stack.getItem().getItemStackLimit(stack)) {
                     stack.stackSize += itemStack.stackSize;
-                    itemStack.stackSize =
-                            Math.max(stack.stackSize - stack.getItem().getItemStackLimit(stack), 0);
+                    itemStack.stackSize = Math.max(stack.stackSize - stack.getItem().getItemStackLimit(stack), 0);
                 }
             }
         }

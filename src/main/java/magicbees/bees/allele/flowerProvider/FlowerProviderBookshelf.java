@@ -1,14 +1,17 @@
 package magicbees.bees.allele.flowerProvider;
 
-import forestry.api.genetics.IIndividual;
-import forestry.api.genetics.IPollinatable;
 import java.util.EnumSet;
+
 import magicbees.main.utils.LocalizationManager;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.oredict.OreDictionary;
+
+import forestry.api.genetics.IIndividual;
+import forestry.api.genetics.IPollinatable;
 
 public class FlowerProviderBookshelf extends FlowerProvider {
 

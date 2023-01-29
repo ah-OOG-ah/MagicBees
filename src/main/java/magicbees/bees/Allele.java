@@ -1,15 +1,5 @@
 package magicbees.bees;
 
-import forestry.api.apiculture.EnumBeeChromosome;
-import forestry.api.apiculture.IAlleleBeeEffect;
-import forestry.api.apiculture.IAlleleBeeSpecies;
-import forestry.api.genetics.AlleleManager;
-import forestry.api.genetics.IAllele;
-import forestry.api.genetics.IAlleleEffect;
-import forestry.api.genetics.IAlleleFlowers;
-import forestry.api.genetics.IAlleleRegistry;
-import forestry.api.genetics.IChromosomeType;
-import forestry.api.genetics.IFlowerProvider;
 import magicbees.api.MagicBeesAPI;
 import magicbees.bees.allele.effect.AlleleEffectCrumbling;
 import magicbees.bees.allele.effect.AlleleEffectCure;
@@ -37,8 +27,20 @@ import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalModsHelper;
+
 import net.minecraft.potion.Potion;
+
 import thaumcraft.api.nodes.NodeType;
+import forestry.api.apiculture.EnumBeeChromosome;
+import forestry.api.apiculture.IAlleleBeeEffect;
+import forestry.api.apiculture.IAlleleBeeSpecies;
+import forestry.api.genetics.AlleleManager;
+import forestry.api.genetics.IAllele;
+import forestry.api.genetics.IAlleleEffect;
+import forestry.api.genetics.IAlleleFlowers;
+import forestry.api.genetics.IAlleleRegistry;
+import forestry.api.genetics.IChromosomeType;
+import forestry.api.genetics.IFlowerProvider;
 
 public class Allele implements IAllele {
 
@@ -120,50 +122,35 @@ public class Allele implements IAllele {
         effectSlowSpeed = new AlleleEffectPotion("SlowSpeed", Potion.moveSlowdown, 3, false).setMalicious();
         effectWithering = new AlleleEffectPotion("Withering", Potion.wither, 10, false).setMalicious();
 
-        TransmutationEffectController controller =
-                new TransmutationEffectController(new TransmutationEffectRailcraft(), new TransmutationEffectVanilla());
+        TransmutationEffectController controller = new TransmutationEffectController(
+                new TransmutationEffectRailcraft(),
+                new TransmutationEffectVanilla());
         MagicBeesAPI.transmutationEffectController = controller;
         effectTransmuting = new AlleleEffectTransmuting("Transmuting", true, controller, 200);
         effectCrumbling = new AlleleEffectCrumbling("Crumbling", true);
 
         effectInvisibility = new AlleleEffectPotion("Invisibility", Potion.invisibility, 10, false);
 
-        spawnGhast = new AlleleEffectSpawnMob("Ghastly", false, "Ghast", "mob.ghast.moan")
-                .setThrottle(2060)
-                .setChanceToSpawn(10)
-                .setMaxMobsInSpawnZone(1);
-        spawnSpider = new AlleleEffectSpawnMob("Spidery", false, "Spider", "mob.spider.step")
-                .setThrottle(400)
-                .setChanceToSpawn(70)
+        spawnGhast = new AlleleEffectSpawnMob("Ghastly", false, "Ghast", "mob.ghast.moan").setThrottle(2060)
+                .setChanceToSpawn(10).setMaxMobsInSpawnZone(1);
+        spawnSpider = new AlleleEffectSpawnMob("Spidery", false, "Spider", "mob.spider.step").setThrottle(400)
+                .setChanceToSpawn(70).setMaxMobsInSpawnZone(4);
+        spawnBlaze = new AlleleEffectSpawnMob("Ablaze", false, "Blaze", "mob.blaze.breathe").setThrottle(800)
+                .setChanceToSpawn(60).setMaxMobsInSpawnZone(2);
+        spawnWolf = new AlleleEffectSpawnMob("Canine", false, "Wolf", "mob.wolf.panting").setThrottle(650)
+                .setChanceToSpawn(40).setMaxMobsInSpawnZone(2);
+        spawnPig = new AlleleEffectSpawnMob("Porcine", true, "Pig", "mob.pig.say").setThrottle(350)
                 .setMaxMobsInSpawnZone(4);
-        spawnBlaze = new AlleleEffectSpawnMob("Ablaze", false, "Blaze", "mob.blaze.breathe")
-                .setThrottle(800)
-                .setChanceToSpawn(60)
-                .setMaxMobsInSpawnZone(2);
-        spawnWolf = new AlleleEffectSpawnMob("Canine", false, "Wolf", "mob.wolf.panting")
-                .setThrottle(650)
-                .setChanceToSpawn(40)
-                .setMaxMobsInSpawnZone(2);
-        spawnPig = new AlleleEffectSpawnMob("Porcine", true, "Pig", "mob.pig.say")
-                .setThrottle(350)
-                .setMaxMobsInSpawnZone(4);
-        spawnCow = new AlleleEffectSpawnMob("Bovine", true, "Cow", "mob.cow.say")
-                .setThrottle(640)
+        spawnCow = new AlleleEffectSpawnMob("Bovine", true, "Cow", "mob.cow.say").setThrottle(640)
                 .setMaxMobsInSpawnZone(3);
-        spawnChicken = new AlleleEffectSpawnMob("Chicken", true, "Chicken", "mob.chicken.hurt")
-                .setThrottle(20)
+        spawnChicken = new AlleleEffectSpawnMob("Chicken", true, "Chicken", "mob.chicken.hurt").setThrottle(20)
                 .setMaxMobsInSpawnZone(20);
-        spawnSheep = new AlleleEffectSpawnMob("Sheep", false, "Sheep", "mob.sheep.say")
-                .setThrottle(450)
+        spawnSheep = new AlleleEffectSpawnMob("Sheep", false, "Sheep", "mob.sheep.say").setThrottle(450)
                 .setMaxMobsInSpawnZone(5);
-        spawnCat = new AlleleEffectSpawnMob("Catty", false, "Ozelot", "mob.cat.meow")
-                .setThrottle(702)
-                .setChanceToSpawn(60)
-                .setMaxMobsInSpawnZone(2);
-        spawnHorse = new AlleleEffectSpawnMob("Horse", false, "EntityHorse", "mob.horse.idle")
-                .setThrottle(450)
-                .setChanceToSpawn(59)
-                .setMaxMobsInSpawnZone(2);
+        spawnCat = new AlleleEffectSpawnMob("Catty", false, "Ozelot", "mob.cat.meow").setThrottle(702)
+                .setChanceToSpawn(60).setMaxMobsInSpawnZone(2);
+        spawnHorse = new AlleleEffectSpawnMob("Horse", false, "EntityHorse", "mob.horse.idle").setThrottle(450)
+                .setChanceToSpawn(59).setMaxMobsInSpawnZone(2);
 
         if (ThaumcraftHelper.isActive()) {
             flowerThaumcraft = new AlleleFlower(FLOWERS_THAUMCRAFT_PLANT, new FlowerProviderThaumcraftFlower(), false);
@@ -172,27 +159,32 @@ public class Allele implements IAllele {
             effectVisRecharge = new AlleleEffectRecharge(EFFECT_VIS_RECHARGE, false);
             effectNodeEmpower = new AlleleEffectEmpowering(EFFECT_NODE_EMPOWER, false);
             effectNodeRepair = new AlleleEffectNodeRepair(EFFECT_NODE_REPAIR, false);
-            effectNodeConversionTaint =
-                    new AlleleEffectNodeConversion(EFFECT_NODE_TAINTING, NodeType.TAINTED, false, 250);
+            effectNodeConversionTaint = new AlleleEffectNodeConversion(
+                    EFFECT_NODE_TAINTING,
+                    NodeType.TAINTED,
+                    false,
+                    250);
             effectNodeConversionPure = new AlleleEffectNodeConversion(EFFECT_NODE_PURIFYING, NodeType.PURE, false, 250);
-            effectNodeConversionHungry =
-                    new AlleleEffectNodeConversion(EFFECT_NODE_RAVENING, NodeType.HUNGRY, false, 2);
+            effectNodeConversionHungry = new AlleleEffectNodeConversion(
+                    EFFECT_NODE_RAVENING,
+                    NodeType.HUNGRY,
+                    false,
+                    2);
 
             spawnBrainyZombie = new AlleleEffectSpawnMob(
-                            EFFECT_BRAINY, false, ThaumcraftHelper.Entity.BRAINY_ZOMBIE.entityID)
-                    .setAggrosPlayerOnSpawn()
-                    .setThrottle(800)
-                    .setSpawnsOnPlayerNear(null)
-                    .setMaxMobsInSpawnZone(2);
+                    EFFECT_BRAINY,
+                    false,
+                    ThaumcraftHelper.Entity.BRAINY_ZOMBIE.entityID).setAggrosPlayerOnSpawn().setThrottle(800)
+                            .setSpawnsOnPlayerNear(null).setMaxMobsInSpawnZone(2);
 
             spawnBats = new AlleleEffectSpawnMob(EFFECT_BATTY, false, ThaumcraftHelper.Entity.FIREBAT.entityID)
-                    .setThrottle(300)
-                    .setSpawnsOnPlayerNear("Bat");
+                    .setThrottle(300).setSpawnsOnPlayerNear("Bat");
 
             spawnWisp = new AlleleEffectSpawnWisp(
-                            EFFECT_WISPY, false, ThaumcraftHelper.Entity.WISP.entityID, "thaumcraft.wisplive")
-                    .setThrottle(1800)
-                    .setChanceToSpawn(79);
+                    EFFECT_WISPY,
+                    false,
+                    ThaumcraftHelper.Entity.WISP.entityID,
+                    "thaumcraft.wisplive").setThrottle(1800).setChanceToSpawn(79);
         } else {
             spawnBats = new AlleleEffectSpawnMob(EFFECT_BATTY, false, "Bat").setThrottle(150);
 
@@ -226,15 +218,15 @@ public class Allele implements IAllele {
                     EFFECT_MANA_DRAIN,
                     true,
                     20,
-                    new String[] {ArsMagicaHelper.Name + ".MobManaCreeper", ArsMagicaHelper.Name + ".ManaVortex"},
-                    new int[] {60, 2});
+                    new String[] { ArsMagicaHelper.Name + ".MobManaCreeper", ArsMagicaHelper.Name + ".ManaVortex" },
+                    new int[] { 60, 2 });
 
             spawnWispOrHecate = new AlleleEffectSpawnMobWeighted(
                     EFFECT_AM_WISP,
                     true,
                     20,
-                    new String[] {ArsMagicaHelper.Name + ".MobWisp", ArsMagicaHelper.Name + ".MobHecate"},
-                    new int[] {40, 3});
+                    new String[] { ArsMagicaHelper.Name + ".MobWisp", ArsMagicaHelper.Name + ".MobHecate" },
+                    new int[] { 40, 3 });
         } else {
             flowerArsMagica = new AlleleFlower(FLOWER_ARS_MAGICA_PLANT, vanillaFlowers, false);
             spawnManaDrainer = new AlleleEffectPlaceholder(EFFECT_MANA_DRAIN, true);
@@ -244,26 +236,20 @@ public class Allele implements IAllele {
         // TODO TE spawning
         if (ThermalModsHelper.isActive()) {
             spawnBlizz = new AlleleEffectSpawnMob(
-                            EFFECT_TE_BLIZZY,
-                            true,
-                            ThermalModsHelper.Entity.BLIZZ.entityID,
-                            ThermalModsHelper.Entity.BLIZZ.soundName)
-                    .setThrottle(100)
-                    .setChanceToSpawn(80);
+                    EFFECT_TE_BLIZZY,
+                    true,
+                    ThermalModsHelper.Entity.BLIZZ.entityID,
+                    ThermalModsHelper.Entity.BLIZZ.soundName).setThrottle(100).setChanceToSpawn(80);
             spawnBlitz = new AlleleEffectSpawnMob(
-                            EFFECT_TE_BLITZ,
-                            true,
-                            ThermalModsHelper.Entity.BLITZ.entityID,
-                            ThermalModsHelper.Entity.BLITZ.soundName)
-                    .setThrottle(100)
-                    .setChanceToSpawn(80);
+                    EFFECT_TE_BLITZ,
+                    true,
+                    ThermalModsHelper.Entity.BLITZ.entityID,
+                    ThermalModsHelper.Entity.BLITZ.soundName).setThrottle(100).setChanceToSpawn(80);
             spawnBasalz = new AlleleEffectSpawnMob(
-                            EFFECT_TE_BASALZ,
-                            true,
-                            ThermalModsHelper.Entity.BASALZ.entityID,
-                            ThermalModsHelper.Entity.BASALZ.soundName)
-                    .setThrottle(100)
-                    .setChanceToSpawn(80);
+                    EFFECT_TE_BASALZ,
+                    true,
+                    ThermalModsHelper.Entity.BASALZ.entityID,
+                    ThermalModsHelper.Entity.BASALZ.soundName).setThrottle(100).setChanceToSpawn(80);
         } else {
             spawnBlizz = new AlleleEffectPlaceholder(EFFECT_TE_BLIZZY, true);
             spawnBlitz = new AlleleEffectPlaceholder(EFFECT_TE_BLITZ, true);
@@ -279,23 +265,24 @@ public class Allele implements IAllele {
         registry.registerDeprecatedAlleleReplacement("magicbees.effectNodeFlux", effectNodeConversionTaint);
         registry.registerDeprecatedAlleleReplacement("magicbees.effectNodeCharge", effectNodeEmpower);
         registry.registerDeprecatedAlleleReplacement(
-                "magicbees.speciesTCAttractive", BeeSpecies.TC_EMPOWERING.getSpecies());
+                "magicbees.speciesTCAttractive",
+                BeeSpecies.TC_EMPOWERING.getSpecies());
         registry.registerDeprecatedAlleleReplacement(
-                "magicbees.speciesBMBloodyBMBloody", BeeSpecies.EARTHY.getSpecies());
+                "magicbees.speciesBMBloodyBMBloody",
+                BeeSpecies.EARTHY.getSpecies());
         registry.registerDeprecatedAlleleReplacement(
-                "magicbees.speciesBMBloodyBMBound", BeeSpecies.ARCANE.getSpecies());
+                "magicbees.speciesBMBloodyBMBound",
+                BeeSpecies.ARCANE.getSpecies());
     }
 
     public static IAlleleBeeSpecies getBaseSpecies(String name) {
-        return (IAlleleBeeSpecies) AlleleManager.alleleRegistry.getAllele(
-                (new StringBuilder()).append("forestry.species").append(name).toString());
+        return (IAlleleBeeSpecies) AlleleManager.alleleRegistry
+                .getAllele((new StringBuilder()).append("forestry.species").append(name).toString());
     }
 
     public static IAlleleBeeSpecies getExtraSpecies(String name) {
-        return (IAlleleBeeSpecies) AlleleManager.alleleRegistry.getAllele((new StringBuilder())
-                .append("extrabees.species.")
-                .append(name.toLowerCase())
-                .toString());
+        return (IAlleleBeeSpecies) AlleleManager.alleleRegistry
+                .getAllele((new StringBuilder()).append("extrabees.species.").append(name.toLowerCase()).toString());
     }
 
     public static IAllele getBaseAllele(String name) {

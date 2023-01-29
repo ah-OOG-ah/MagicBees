@@ -3,9 +3,9 @@ package magicbees.item.types;
 import magicbees.main.utils.LocalizationManager;
 
 public enum PollenType {
+
     UNUSUAL("unusual", 0xD8417B, 0xA03059),
-    PHASED("phased", 0x4974B4, 0x456BA5),
-    ;
+    PHASED("phased", 0x4974B4, 0x456BA5),;
 
     private PollenType(String pName, int colourA, int colourB) {
         this.name = pName;

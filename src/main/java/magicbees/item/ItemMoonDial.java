@@ -1,20 +1,24 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
 import magicbees.main.utils.MoonPhase;
 import magicbees.main.utils.TabMagicBees;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemMoonDial extends Item {
+
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
@@ -37,20 +41,18 @@ public class ItemMoonDial extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
-        return this.icons[
-                MoonPhase.getMoonPhaseFromTime(player.worldObj.getWorldTime()).ordinal()];
+        return this.icons[MoonPhase.getMoonPhaseFromTime(player.worldObj.getWorldTime()).ordinal()];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List infoList, boolean par4) {
-        if (Config.moonDialShowsPhaseInText
-                && entityPlayer.getCurrentEquippedItem() != null
+        if (Config.moonDialShowsPhaseInText && entityPlayer.getCurrentEquippedItem() != null
                 && entityPlayer.getCurrentEquippedItem().getItem() == this) {
-            infoList.add("\u00A77"
-                    + MoonPhase.getMoonPhaseFromTime(entityPlayer.worldObj.getWorldTime())
-                            .getLocalizedName());
+            infoList.add(
+                    "\u00A77"
+                            + MoonPhase.getMoonPhaseFromTime(entityPlayer.worldObj.getWorldTime()).getLocalizedName());
         }
     }
 }

@@ -2,15 +2,19 @@ package magicbees.client.gui;
 
 import magicbees.main.CommonProxy;
 import magicbees.tileentity.TileEntityEffectJar;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class GUIEffectJar extends GuiContainer {
+
     public static final String BACKGROUND_FILE = "jarScreen.png";
-    public static final ResourceLocation BACKGROUND_LOCATION =
-            new ResourceLocation(CommonProxy.DOMAIN, CommonProxy.GUI_TEXTURE + "jarScreen.png");
+    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(
+            CommonProxy.DOMAIN,
+            CommonProxy.GUI_TEXTURE + "jarScreen.png");
 
     private static final int WIDTH = 176;
     private static final int HEIGHT = 156;

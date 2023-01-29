@@ -1,12 +1,15 @@
 package magicbees.world.feature;
 
-import forestry.api.apiculture.hives.IHiveGen;
 import magicbees.main.utils.BlockUtil;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
+import forestry.api.apiculture.hives.IHiveGen;
+
 public class HiveGenUnderground implements IHiveGen {
+
     protected final int minLevel;
     protected final int range;
     protected final Block replace;

@@ -1,9 +1,11 @@
 package magicbees.bees.allele.effect;
 
-import forestry.api.genetics.IEffectData;
 import net.minecraft.nbt.NBTTagCompound;
 
+import forestry.api.genetics.IEffectData;
+
 public class EffectData implements IEffectData {
+
     private int[] intData;
     private boolean[] boolData;
     private float[] floatData;

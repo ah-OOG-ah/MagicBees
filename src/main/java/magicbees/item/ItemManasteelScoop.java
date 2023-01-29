@@ -1,11 +1,8 @@
 package magicbees.item;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.core.IToolScoop;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.compat.BotaniaHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -14,11 +11,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import vazkii.botania.api.mana.IManaUsingItem;
 
-@Optional.InterfaceList({
-    @Optional.Interface(iface = "vazkii.botania.api.mana.IManaUsingItem", modid = BotaniaHelper.Name, striprefs = true)
-})
+import vazkii.botania.api.mana.IManaUsingItem;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.core.IToolScoop;
+
+@Optional.InterfaceList({ @Optional.Interface(
+        iface = "vazkii.botania.api.mana.IManaUsingItem",
+        modid = BotaniaHelper.Name,
+        striprefs = true) })
 public class ItemManasteelScoop extends Item implements IManaUsingItem, IToolScoop {
 
     public static final int MANA_PER_DAMAGE = 30;
@@ -33,8 +36,8 @@ public class ItemManasteelScoop extends Item implements IManaUsingItem, IToolSco
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase player) {
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z,
+            EntityLivingBase player) {
         stack.damageItem(1, player);
         return true;
     }
@@ -48,7 +51,7 @@ public class ItemManasteelScoop extends Item implements IManaUsingItem, IToolSco
     @Optional.Method(modid = BotaniaHelper.Name)
     public boolean getIsRepairable(ItemStack toolStack, ItemStack material) {
         return (material.getItem() == BotaniaHelper.itemManaResource
-                        && material.getItemDamage() == BotaniaHelper.ManaResource.MANASTEEL.ordinal())
+                && material.getItemDamage() == BotaniaHelper.ManaResource.MANASTEEL.ordinal())
                 || super.getIsRepairable(toolStack, material);
     }
 
@@ -62,7 +65,7 @@ public class ItemManasteelScoop extends Item implements IManaUsingItem, IToolSco
     public void onUpdate(ItemStack stack, World world, Entity player, int par4, boolean par5) {
         // Unsure if the server-side exclusion is necessary, but boy it looks disconcerting on the client if it's in.
         if (
-        /*!world.isRemote && */ stack.getItemDamage() > 0 && player instanceof EntityPlayer) {
+        /* !world.isRemote && */ stack.getItemDamage() > 0 && player instanceof EntityPlayer) {
             if (BotaniaHelper.requestMana(stack, (EntityPlayer) player, MANA_PER_DAMAGE, 1)) {
                 stack.setItemDamage(stack.getItemDamage() - 1);
             }

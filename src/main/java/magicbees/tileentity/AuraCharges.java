@@ -2,11 +2,14 @@ package magicbees.tileentity;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import magicbees.bees.AuraCharge;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class AuraCharges {
+
     private static final String auraChargesTagName = "AuraCharges";
 
     private final Map<AuraCharge, Long> charges = new HashMap<AuraCharge, Long>(AuraCharge.values().length);
