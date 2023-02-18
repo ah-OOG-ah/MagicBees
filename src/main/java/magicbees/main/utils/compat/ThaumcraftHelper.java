@@ -440,6 +440,7 @@ public class ThaumcraftHelper implements IModHelper {
         ItemStack input;
         IRecipe recipe;
         String category = "MAGICBEES";
+
         ResearchCategories.registerCategory(
                 category,
                 new ResourceLocation(CommonProxy.DOMAIN, CommonProxy.ITEM_TEXTURE + "beeInfusion.png"),
@@ -740,7 +741,7 @@ public class ThaumcraftHelper implements IModHelper {
         item = ItemInterface.getItemStack(ForestryHelper.Name, "candle");
         ThaumcraftApi.registerObjectTag(item, list);
 
-        list = new AspectList() /* .add(Aspect.SEED, 1) */.add(Aspect.PLANT, 1);
+        list = new AspectList()/* .add(Aspect.SEED, 1) */.add(Aspect.PLANT, 1);
         item = ItemInterface.getItemStack(ForestryHelper.Name, "candle");
         ThaumcraftApi.registerObjectTag(item, list);
 

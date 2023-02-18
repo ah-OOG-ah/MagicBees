@@ -190,6 +190,8 @@ public enum BeeSpecies {
             EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
     TC_CHAOS("TCChaos", "tenebrarum", BeeClassification.THAUMIC, 0xCCCCCC, BodyColours.THAUMCRAFT_SHARD,
             EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+    TC_ESSENTIA("TCEssentia", "defaultium essentia apis", BeeClassification.THAUMIC, 0xCCCCCC,
+            BodyColours.THAUMCRAFT_SHARD, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
 
     TC_VIS("TCVis", "arcanus saecula", BeeClassification.THAUMIC, 0x004c99, BodyColours.THAUMCRAFT_NODE,
             EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
@@ -314,7 +316,9 @@ public enum BeeSpecies {
 
     // -------------------Applied Energistics 2 Bees---------------------------
     AE_SKYSTONE("AESkystone", "terra astris", BeeClassification.TRANSMUTING, 0x4B8381, 0x252929, EnumTemperature.HOT,
-            EnumHumidity.ARID, false, true),;
+            EnumHumidity.ARID, false, true),
+
+    ;
 
     // For body colours used by more than one bee.
     private class BodyColours {
@@ -403,6 +407,7 @@ public enum BeeSpecies {
         TC_EARTH.registerGenomeTemplate(BeeGenomeManager.getTemplateTCEarth());
         TC_ORDER.registerGenomeTemplate(BeeGenomeManager.getTemplateTCOrder());
         TC_CHAOS.registerGenomeTemplate(BeeGenomeManager.getTemplateTCChaos());
+        TC_ESSENTIA.registerGenomeTemplate(BeeGenomeManager.getTemplateTCEssentia());
         TC_VIS.registerGenomeTemplate(BeeGenomeManager.getTemplateTCVis());
         TC_REJUVENATING.registerGenomeTemplate(BeeGenomeManager.getTemplateTCRejuvinating());
         TC_EMPOWERING.registerGenomeTemplate(BeeGenomeManager.getTemplateTCEmpowering());
@@ -461,6 +466,7 @@ public enum BeeSpecies {
         BeeProductHelper.initThaumcraftProducts();
         if (!ThaumcraftHelper.isActive()) {
             TC_CHAOS.setInactive();
+            TC_ESSENTIA.setInactive();
             TC_AIR.setInactive();
             TC_FIRE.setInactive();
             TC_WATER.setInactive();

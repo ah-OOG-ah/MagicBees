@@ -3,12 +3,7 @@ package magicbees.main;
 import java.io.File;
 import java.lang.reflect.Field;
 
-import magicbees.block.BlockEffectJar;
-import magicbees.block.BlockEnchantedEarth;
-import magicbees.block.BlockHive;
-import magicbees.block.BlockMagicApiary;
-import magicbees.block.BlockManaAuraProvider;
-import magicbees.block.BlockVisAuraProvider;
+import magicbees.block.*;
 import magicbees.block.types.HiveType;
 import magicbees.item.ItemCapsule;
 import magicbees.item.ItemComb;
@@ -39,10 +34,7 @@ import magicbees.main.utils.VersionInfo;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.storage.BackpackDefinition;
-import magicbees.tileentity.TileEntityEffectJar;
-import magicbees.tileentity.TileEntityMagicApiary;
-import magicbees.tileentity.TileEntityManaAuraProvider;
-import magicbees.tileentity.TileEntityVisAuraProvider;
+import magicbees.tileentity.*;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -111,6 +103,8 @@ public class Config {
     public static BlockEffectJar effectJar;
     public static BlockHive hive;
     public static BlockMagicApiary magicApiary;
+    public static BlockPhialingCabinet phialingCabinet;
+    public static BlockInfusionFucker infusionIntercepter;
     public static BlockManaAuraProvider manaAuraProvider;
     public static BlockVisAuraProvider visAuraProvider;
 
@@ -207,6 +201,7 @@ public class Config {
         voidCapsule = new ItemCapsule(CapsuleType.VOID, capsuleStackSizeMax);
 
         setupThaumcraftItems();
+        setupPhialingCabinet();
         setupBotaniaItems();
 
         setupOreDictionaryEntries();
@@ -365,6 +360,16 @@ public class Config {
         GameRegistry.registerTileEntity(TileEntityMagicApiary.class, TileEntityMagicApiary.tileEntityName);
     }
 
+    public void setupPhialingCabinet() {
+        phialingCabinet = new BlockPhialingCabinet();
+        GameRegistry.registerBlock(phialingCabinet, "phialingCabinet");
+        GameRegistry.registerTileEntity(TileEntityPhialingCabinet.class, TileEntityPhialingCabinet.tileEntityName);
+
+        infusionIntercepter = new BlockInfusionFucker();
+        GameRegistry.registerBlock(infusionIntercepter, "infusionIntercepter");
+        GameRegistry.registerTileEntity(TileEntityInfusionFucker.class, TileEntityInfusionFucker.tileEntityName);
+    }
+
     private void setupFrames() {
         hiveFrameMagic = new ItemMagicHiveFrame(HiveFrameType.MAGIC);
         hiveFrameResilient = new ItemMagicHiveFrame(HiveFrameType.RESILIENT);
@@ -444,7 +449,6 @@ public class Config {
         if (BotaniaHelper.isActive()) {
             manasteelScoop = new ItemManasteelScoop();
             GameRegistry.registerItem(manasteelScoop, manasteelScoop.getUnlocalizedName(), CommonProxy.DOMAIN);
-
             manasteelGrafter = new ItemManasteelGrafter();
             GameRegistry.registerItem(manasteelGrafter, manasteelGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
         }
@@ -482,6 +486,7 @@ public class Config {
 
             voidGrafter = new ItemVoidGrafter();
             GameRegistry.registerItem(voidGrafter, voidGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
+
         }
     }
 

@@ -45,6 +45,7 @@ tile.hive.resonant.name=Resonating Hive
 tile.hive.infernal.name=Infernal Hive
 tile.hive.oblivion.name=Oblivion Hive
 tile.enchantedEarth.name=Enchanted Earth
+tile.infusionIntercepter.name=Infusion Interceptor
 
 #Combs
 comb.mundane=Mundane Comb

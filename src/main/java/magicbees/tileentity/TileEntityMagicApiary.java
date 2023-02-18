@@ -3,6 +3,7 @@ package magicbees.tileentity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.aspects.IAspectContainer;
+import thaumcraft.api.aspects.IEssentiaTransport;
 
 import com.mojang.authlib.GameProfile;
 
@@ -50,8 +57,10 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
 import forestry.api.core.ForestryAPI;
 import forestry.api.core.IErrorLogic;
+// import magicbees.api.bees.BeeClassification;
 
-public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged {
+public class TileEntityMagicApiary extends TileEntity
+        implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged, IAspectContainer, IEssentiaTransport {
 
     // Constants
     private static final int AURAPROVIDER_SEARCH_RADIUS = 6;
@@ -62,13 +71,237 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     private ChunkCoords auraProviderPosition;
     private BiomeGenBase biome;
     private int breedingProgressPercent = 0;
-
     private final IBeekeepingLogic beeLogic;
     private final IErrorLogic errorLogic;
     private final IBeeListener beeListener;
     private final IBeeModifier beeModifier;
     private final MagicApiaryInventory inventory;
     private final AuraCharges auraCharges = new AuraCharges();
+    public String name = "magicApiary";
+
+    // added directly from the crucible of souls
+    public AspectList myAspects = new AspectList();
+    public Aspect aspect;
+    public int amount = 0;
+    public int maxAmount = 64;
+    public int incre = 0;
+
+    /*
+     * public static final Aspect AIR = new Aspect("aer", 16777086, "e", 1); public static final Aspect EARTH = new
+     * Aspect("terra", 5685248, "2", 1); public static final Aspect FIRE = new Aspect("ignis", 16734721, "c", 1); public
+     * static final Aspect WATER = new Aspect("aqua", 3986684, "3", 1); public static final Aspect ORDER = new
+     * Aspect("ordo", 14013676, "7", 1); public static final Aspect ENTROPY = new Aspect("perditio", 4210752, "8", 771);
+     */
+
+    // the commented lines above show how the essentias are labeled, you use the actual name of the essentia to grab it.
+    public Aspect AIR = aspect.getAspect("aer");
+
+    // added directly from the crucible of souls
+    @Override
+    public void setAspects(AspectList aspects) {
+        this.myAspects = aspects;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public AspectList getAspects() {
+        // TODO Auto-generated method stub
+        return this.myAspects;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean doesContainerAccept(Aspect tag) {
+        return false;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public int addToContainer(Aspect tag, int am) {
+        if (am == 0) {
+            return am;
+        } else {
+            if (this.amount < this.maxAmount && tag == this.aspect || this.amount == 0) {
+                this.aspect = tag;
+                int added = Math.min(am, this.maxAmount - this.amount);
+                this.amount += added;
+                am -= added;
+            }
+            return am;
+        }
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean takeFromContainer(Aspect tag, int amount) {
+        if (!this.worldObj.isRemote) {
+            this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+        }
+        if (this.myAspects.getAmount(tag) >= amount) {
+            this.myAspects.reduce(tag, amount);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean takeFromContainer(AspectList ot) {
+        // TODO Auto-generated method stub
+        boolean hasIt = true;
+        if (!this.worldObj.isRemote) {
+            this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+        }
+        ot.aspects.keySet().iterator();
+        Iterator iterator = ot.aspects.keySet().iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            if (this.myAspects.getAmount((Aspect) next) < ot.getAmount((Aspect) next)) hasIt = false;
+        }
+        if (hasIt) {
+            iterator = ot.aspects.keySet().iterator();
+            while (iterator.hasNext()) {
+                Object next = iterator.next();
+                myAspects.reduce((Aspect) next, ot.getAmount((Aspect) next));
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean doesContainerContainAmount(Aspect tag, int amount) {
+        // TODO Auto-generated method stub
+        return (this.myAspects.getAmount(tag) > amount);
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean doesContainerContain(AspectList ot) {
+        boolean hasIt = true;
+        ot.aspects.keySet().iterator();
+        Iterator iterator = ot.aspects.keySet().iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            if (this.myAspects.getAmount((Aspect) next) < ot.getAmount((Aspect) next)) hasIt = false;
+        }
+        return hasIt;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public int containerContains(Aspect tag) {
+        return this.myAspects.getAmount(tag);
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean isConnectable(ForgeDirection face) {
+        return (face != ForgeDirection.UP);
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean canInputFrom(ForgeDirection face) {
+        return false;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean canOutputTo(ForgeDirection face) {
+        return (face != ForgeDirection.UP);
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public void setSuction(Aspect aspect, int amount) {
+        // TODO Auto-generated method stub
+
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public int takeEssentia(Aspect aspect, int amount, ForgeDirection arg2) {
+        if (arg2 != ForgeDirection.UP) {
+            if (!this.worldObj.isRemote) {
+                this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+            }
+            if (amount > this.myAspects.getAmount(aspect)) {
+                int total = this.myAspects.getAmount(aspect);
+                this.myAspects.reduce(aspect, total);
+                return total;
+            } else {
+                this.myAspects.reduce(aspect, amount);
+                return amount;
+            }
+
+        } else {
+            return 0;
+        }
+
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public int getMinimumSuction() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public boolean renderExtendedTube() {
+        // TODO Auto-generated method stub
+        return false;
+        // NEW AFTER THIS LINE
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public Aspect getSuctionType(ForgeDirection face) {
+        return null;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public int getSuctionAmount(ForgeDirection face) {
+        return 0;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public Aspect getEssentiaType(ForgeDirection face) {
+        return this.myAspects.size() > 0
+                ? this.myAspects.getAspects()[this.worldObj.rand.nextInt(this.myAspects.getAspects().length)]
+                : null;
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public int getEssentiaAmount(ForgeDirection face) {
+        return this.myAspects.visSize();
+    }
+
+    // added directly from the crucible of souls
+    @Override
+    public int addEssentia(Aspect arg0, int arg1, ForgeDirection arg2) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    // added directly from the crucible of souls
+    private float tagAmount() {
+        int amount = 0;
+        Iterator iterator = this.myAspects.aspects.keySet().iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            amount += this.myAspects.getAmount((Aspect) next);
+        }
+        return amount;
+    }
 
     public TileEntityMagicApiary() {
         beeLogic = BeeManager.beeRoot.createBeekeepingLogic(this);
@@ -254,6 +487,17 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         beeLogic.writeToNBT(compound);
         ChunkCoords.writeToNBT(auraProviderPosition, compound);
         auraCharges.writeToNBT(compound);
+
+        // soul crucible code below
+        NBTTagCompound aspects = new NBTTagCompound();
+        Iterator iterator = Aspect.aspects.keySet().iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setInteger("Amount", this.myAspects.getAmount(Aspect.getAspect((String) next)));
+            aspects.setTag((String) next, tag);
+        }
+        compound.setTag("Aspects", aspects);
     }
 
     @Override
@@ -264,12 +508,43 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         beeLogic.readFromNBT(compound);
         auraProviderPosition = ChunkCoords.readFromNBT(compound);
         auraCharges.readFromNBT(compound);
+
+        // soul crucible code below
+        AspectList readAspects = new AspectList();
+        NBTTagCompound aspects = compound.getCompoundTag("Aspects");
+        Iterator iterator = Aspect.aspects.keySet().iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            NBTTagCompound aspect = aspects.getCompoundTag((String) next);
+            int amount = aspect.getInteger("Amount");
+            if (amount > 0) {
+                readAspects.add(Aspect.getAspect((String) next), amount);
+            }
+        }
+        this.myAspects = readAspects;
     }
 
     @Override
     public Packet getDescriptionPacket() {
         beeLogic.syncToClient();
         EventAuraChargeUpdate event = new EventAuraChargeUpdate(new ChunkCoords(this), auraCharges);
+
+        // soul crucible code below
+
+        NBTTagCompound access = new NBTTagCompound();
+        NBTTagCompound aspects = new NBTTagCompound();
+
+        Iterator iterator = Aspect.aspects.keySet().iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setInteger("Amount", this.myAspects.getAmount(Aspect.getAspect((String) next)));
+            aspects.setTag((String) next, tag);
+        }
+        access.setTag("Aspects", aspects);
+
+        // this code right here could potentially be an issue though
+
         return event.getPacket();
     }
 
@@ -283,6 +558,23 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     @Override
     public void updateEntity() {
+        // this allows it to add essentia
+        if (incre >= 20) {
+            ItemStack bee = this.getBeeInventory().getQueen();
+            if (bee != null) {
+                String beeName = bee.getDisplayName();
+                if ((beeName != null && !beeName.isEmpty())) {
+                    String[] parts = beeName.split(" ");
+                    String beeType = parts[1];
+
+                    if (beeType.equals("defaultium essentia apis")) {
+                        // get fucked
+                    }
+                }
+            }
+        }
+        incre++;
+
         if (worldObj.isRemote) {
             updateClientSide();
         } else {
@@ -672,6 +964,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         }
     }
 
+    // I think this is the updater
     private static class MagicApiaryBeeListener extends DefaultBeeListener {
 
         private final TileEntityMagicApiary magicApiary;
